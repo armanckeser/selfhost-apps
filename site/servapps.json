@@ -1,95 +1,99 @@
-[
-  {
-    "name": "Stars Organizer",
-    "description": "Search, tag, rate and sort your GitHub stars into GitHub Lists.",
-    "longDescription": "<p>Stars Organizer imports every repo you have starred on GitHub into one searchable table, with language, stars, last push and a health score. Tag repos, rate them, write notes, and sort them into GitHub Lists. Lists you make here are real GitHub Lists, so they show on your profile.</p><p>Explore finds repos you starred and forgot, and the ones that went quiet or were archived, so you can unstar them in bulk.</p><p>Needs a classic GitHub token with the repo scope, which you paste into the install form. Tags, ratings and notes stay in this server's database; Lists and unstars are written to GitHub. Not affiliated with GitHub.</p>",
-    "tags": [
-      "developer",
-      "self-hosted"
-    ],
-    "repository": "https://github.com/armanckeser/github-stars-organizer",
-    "image": "ghcr.io/armanckeser/github-stars-organizer:1.2.0",
-    "supported_architectures": [
-      "amd64",
-      "arm64"
-    ],
-    "id": "github-stars-organizer",
-    "icon": "https://armanckeser.github.io/selfhost-apps/servapps/github-stars-organizer/icon.png",
-    "screenshots": [
-      "https://armanckeser.github.io/selfhost-apps/servapps/github-stars-organizer/screenshots/1.png",
-      "https://armanckeser.github.io/selfhost-apps/servapps/github-stars-organizer/screenshots/2.png"
-    ],
-    "compose": "https://armanckeser.github.io/selfhost-apps/servapps/github-stars-organizer/cosmos-compose.json",
-    "artefacts": {}
-  },
-  {
-    "name": "Kumbara",
-    "description": "Budgeting that files your bank feed for you and opens instantly on your phone.",
-    "longDescription": "<p>Kumbara pulls your bank transactions through SimpleFIN and files what it recognizes. For the rest it asks once per merchant, and one answer covers every charge from that merchant. Transfers between your own accounts are paired, so they never count as spending.</p><p>The budget is Needs, Wants and Savings, with what is left per day. It also tracks stock grants, investments, and paychecks from gross to net.</p><p>Kumbara is a phone app you install from the browser. Every screen loads from data already on your phone, so it opens instantly. Connect your bank from the app with a SimpleFIN setup token (SimpleFIN costs about $15 a year, paid to them). Single household.</p>",
-    "tags": [
-      "finance",
-      "self-hosted"
-    ],
-    "repository": "https://github.com/armanckeser/kumbara",
-    "image": "ghcr.io/armanckeser/kumbara:0.22.0",
-    "supported_architectures": [
-      "amd64",
-      "arm64"
-    ],
-    "id": "kumbara",
-    "icon": "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/icon.png",
-    "screenshots": [
-      "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/screenshots/1.png",
-      "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/screenshots/2.png",
-      "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/screenshots/3.png",
-      "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/screenshots/4.png"
-    ],
-    "compose": "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/cosmos-compose.json",
-    "artefacts": {}
-  },
-  {
-    "name": "Jellymeme",
-    "description": "Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.",
-    "longDescription": "<p>Describe a moment the way you'd tell a friend, \"when he admits the robot hand freaks him out\", and Jellymeme finds it in your Jellyfin library. Trim it to the line you want, burn in the subtitles or your own caption, and export a GIF, a clip or a still.</p><p>Paste a list of scenes, such as the replies to a \"best scenes in this show\" thread, and every line becomes a clip in one montage.</p><p>Jellymeme reads subtitles and video through Jellyfin's HTTP API, so it needs no access to your media files. Connect your Jellyfin server and an API key in Settings after installing. Indexing and rendering use the CPU; a Raspberry Pi works but is slow.</p>",
-    "tags": [
-      "media",
-      "self-hosted"
-    ],
-    "repository": "https://github.com/armanckeser/jellymeme",
-    "image": "ghcr.io/armanckeser/jellymeme:1.1.0",
-    "supported_architectures": [
-      "amd64",
-      "arm64"
-    ],
-    "id": "jellymeme",
-    "icon": "https://armanckeser.github.io/selfhost-apps/servapps/jellymeme/icon.png",
-    "screenshots": [
-      "https://armanckeser.github.io/selfhost-apps/servapps/jellymeme/screenshots/1.png"
-    ],
-    "compose": "https://armanckeser.github.io/selfhost-apps/servapps/jellymeme/cosmos-compose.json",
-    "artefacts": {}
-  },
-  {
-    "name": "USCIS Tracker",
-    "description": "Know what moved on your green card case, and when your date comes up.",
-    "longDescription": "<p>One tap from a signed-in my.uscis.gov tab reads every case in your household. The tracker keeps the full history, shows what changed since you last looked (including the updates USCIS never announces), and estimates when the visa bulletin will reach your priority date.</p><p>It sends a push notification when a case changes. The refresh runs from your own phone's USCIS session, so the server never holds your USCIS password; your phone has to reach the server (a home server plus Tailscale works well) over HTTPS.</p>",
-    "tags": [
-      "utilities",
-      "self-hosted"
-    ],
-    "repository": "https://github.com/armanckeser/uscis-tracker",
-    "image": "ghcr.io/armanckeser/uscis-tracker:0.3.0",
-    "supported_architectures": [
-      "amd64",
-      "arm64"
-    ],
-    "id": "uscis-tracker",
-    "icon": "https://armanckeser.github.io/selfhost-apps/servapps/uscis-tracker/icon.png",
-    "screenshots": [
-      "https://armanckeser.github.io/selfhost-apps/servapps/uscis-tracker/screenshots/1.png",
-      "https://armanckeser.github.io/selfhost-apps/servapps/uscis-tracker/screenshots/2.png"
-    ],
-    "compose": "https://armanckeser.github.io/selfhost-apps/servapps/uscis-tracker/cosmos-compose.json",
-    "artefacts": {}
-  }
-]
+{
+  "source": "https://armanckeser.github.io/selfhost-apps/servapps.json",
+  "showcase": [],
+  "all": [
+    {
+      "name": "Stars Organizer",
+      "description": "Search, tag, rate and sort your GitHub stars into GitHub Lists.",
+      "longDescription": "<p>Stars Organizer imports every repo you have starred on GitHub into one searchable table, with language, stars, last push and a health score. Tag repos, rate them, write notes, and sort them into GitHub Lists. Lists you make here are real GitHub Lists, so they show on your profile.</p><p>Explore finds repos you starred and forgot, and the ones that went quiet or were archived, so you can unstar them in bulk.</p><p>Needs a classic GitHub token with the repo scope, which you paste into the install form. Tags, ratings and notes stay in this server's database; Lists and unstars are written to GitHub. Not affiliated with GitHub.</p>",
+      "tags": [
+        "developer",
+        "self-hosted"
+      ],
+      "repository": "https://github.com/armanckeser/github-stars-organizer",
+      "image": "ghcr.io/armanckeser/github-stars-organizer:1.2.0",
+      "supported_architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "id": "github-stars-organizer",
+      "icon": "https://armanckeser.github.io/selfhost-apps/servapps/github-stars-organizer/icon.png",
+      "screenshots": [
+        "https://armanckeser.github.io/selfhost-apps/servapps/github-stars-organizer/screenshots/1.png",
+        "https://armanckeser.github.io/selfhost-apps/servapps/github-stars-organizer/screenshots/2.png"
+      ],
+      "compose": "https://armanckeser.github.io/selfhost-apps/servapps/github-stars-organizer/cosmos-compose.json",
+      "artefacts": {}
+    },
+    {
+      "name": "Kumbara",
+      "description": "Budgeting that files your bank feed for you and opens instantly on your phone.",
+      "longDescription": "<p>Kumbara pulls your bank transactions through SimpleFIN and files what it recognizes. For the rest it asks once per merchant, and one answer covers every charge from that merchant. Transfers between your own accounts are paired, so they never count as spending.</p><p>The budget is Needs, Wants and Savings, with what is left per day. It also tracks stock grants, investments, and paychecks from gross to net.</p><p>Kumbara is a phone app you install from the browser. Every screen loads from data already on your phone, so it opens instantly. Connect your bank from the app with a SimpleFIN setup token (SimpleFIN costs about $15 a year, paid to them). Single household.</p>",
+      "tags": [
+        "finance",
+        "self-hosted"
+      ],
+      "repository": "https://github.com/armanckeser/kumbara",
+      "image": "ghcr.io/armanckeser/kumbara:0.22.0",
+      "supported_architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "id": "kumbara",
+      "icon": "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/icon.png",
+      "screenshots": [
+        "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/screenshots/1.png",
+        "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/screenshots/2.png",
+        "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/screenshots/3.png",
+        "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/screenshots/4.png"
+      ],
+      "compose": "https://armanckeser.github.io/selfhost-apps/servapps/kumbara/cosmos-compose.json",
+      "artefacts": {}
+    },
+    {
+      "name": "Jellymeme",
+      "description": "Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.",
+      "longDescription": "<p>Describe a moment the way you'd tell a friend, \"when he admits the robot hand freaks him out\", and Jellymeme finds it in your Jellyfin library. Trim it to the line you want, burn in the subtitles or your own caption, and export a GIF, a clip or a still.</p><p>Paste a list of scenes, such as the replies to a \"best scenes in this show\" thread, and every line becomes a clip in one montage.</p><p>Jellymeme reads subtitles and video through Jellyfin's HTTP API, so it needs no access to your media files. Connect your Jellyfin server and an API key in Settings after installing. Indexing and rendering use the CPU; a Raspberry Pi works but is slow.</p>",
+      "tags": [
+        "media",
+        "self-hosted"
+      ],
+      "repository": "https://github.com/armanckeser/jellymeme",
+      "image": "ghcr.io/armanckeser/jellymeme:1.1.0",
+      "supported_architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "id": "jellymeme",
+      "icon": "https://armanckeser.github.io/selfhost-apps/servapps/jellymeme/icon.png",
+      "screenshots": [
+        "https://armanckeser.github.io/selfhost-apps/servapps/jellymeme/screenshots/1.png"
+      ],
+      "compose": "https://armanckeser.github.io/selfhost-apps/servapps/jellymeme/cosmos-compose.json",
+      "artefacts": {}
+    },
+    {
+      "name": "USCIS Tracker",
+      "description": "Know what moved on your green card case, and when your date comes up.",
+      "longDescription": "<p>One tap from a signed-in my.uscis.gov tab reads every case in your household. The tracker keeps the full history, shows what changed since you last looked (including the updates USCIS never announces), and estimates when the visa bulletin will reach your priority date.</p><p>It sends a push notification when a case changes. The refresh runs from your own phone's USCIS session, so the server never holds your USCIS password; your phone has to reach the server (a home server plus Tailscale works well) over HTTPS.</p>",
+      "tags": [
+        "utilities",
+        "self-hosted"
+      ],
+      "repository": "https://github.com/armanckeser/uscis-tracker",
+      "image": "ghcr.io/armanckeser/uscis-tracker:0.3.0",
+      "supported_architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "id": "uscis-tracker",
+      "icon": "https://armanckeser.github.io/selfhost-apps/servapps/uscis-tracker/icon.png",
+      "screenshots": [
+        "https://armanckeser.github.io/selfhost-apps/servapps/uscis-tracker/screenshots/1.png",
+        "https://armanckeser.github.io/selfhost-apps/servapps/uscis-tracker/screenshots/2.png"
+      ],
+      "compose": "https://armanckeser.github.io/selfhost-apps/servapps/uscis-tracker/cosmos-compose.json",
+      "artefacts": {}
+    }
+  ]
+}
