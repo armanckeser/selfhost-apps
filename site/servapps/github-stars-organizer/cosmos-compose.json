@@ -2,10 +2,20 @@
   "cosmos-installer": {
     "form": [
       {
+        "name": "GITHUB_TOKEN_help",
+        "label": "Create one at https://github.com/settings/tokens/new?scopes=repo",
+        "type": "info"
+      },
+      {
         "name": "GITHUB_TOKEN",
         "label": "GitHub token (classic, repo scope)",
         "initialValue": "",
         "type": "password"
+      },
+      {
+        "name": "AUTH_PASSWORD_help",
+        "label": "Set one if anyone else on your network can reach this server.",
+        "type": "info"
       },
       {
         "name": "AUTH_PASSWORD",

@@ -21,6 +21,7 @@ Needs a classic GitHub token with the repo scope, which you paste into the insta
   <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/github-stars-organizer.png</Icon>
   <Changes>1.2.1: - With no GitHub token set, **Import Stars** now shows a **Create one** link that opens GitHub with the `repo` scope ticked.</Changes>
   <License>AGPL-3.0-or-later</License>
+  <Requires>GitHub token (classic, repo scope). Create one at https://github.com/settings/tokens/new?scopes=repo</Requires>
   <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/github-stars-organizer-1.png</Screenshot>
   <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/github-stars-organizer-2.png</Screenshot>
   <Config Name="Web UI" Target="8080" Default="5184" Mode="tcp" Description="Port for the web app." Type="Port" Display="always" Required="true" Mask="false">5184</Config>

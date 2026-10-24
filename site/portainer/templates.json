@@ -2,6 +2,7 @@
   "version": "3",
   "templates": [
     {
+      "id": 1,
       "type": 3,
       "title": "Stars Organizer",
       "name": "github-stars-organizer",
@@ -30,16 +31,19 @@
         {
           "name": "GITHUB_TOKEN",
           "label": "GitHub token (classic, repo scope)",
+          "description": "Create one at https://github.com/settings/tokens/new?scopes=repo",
           "default": ""
         },
         {
           "name": "AUTH_PASSWORD",
           "label": "Password for the app (leave empty for no login)",
+          "description": "Set one if anyone else on your network can reach this server.",
           "default": ""
         }
       ]
     },
     {
+      "id": 2,
       "type": 3,
       "title": "Kumbara",
       "name": "kumbara",
@@ -68,11 +72,13 @@
         {
           "name": "AUTH_PASSWORD",
           "label": "Password for the app (leave empty for no login)",
+          "description": "Set one if anyone else on your network can reach this server.",
           "default": ""
         }
       ]
     },
     {
+      "id": 3,
       "type": 3,
       "title": "Jellymeme",
       "name": "jellymeme",
@@ -101,11 +107,13 @@
         {
           "name": "AUTH_PASSWORD",
           "label": "Password for the app (leave empty for no login)",
+          "description": "Set one if anyone else on your network can reach this server.",
           "default": ""
         }
       ]
     },
     {
+      "id": 4,
       "type": 3,
       "title": "USCIS Tracker",
       "name": "uscis-tracker",
@@ -134,6 +142,7 @@
         {
           "name": "AUTH_PASSWORD",
           "label": "Password for the app (leave empty for no login)",
+          "description": "Set one if anyone else on your network can reach this server.",
           "default": ""
         }
       ]

@@ -24,6 +24,8 @@
       "type": "random",
       "label": "db secret",
       "min": 32,
+      "encoding": "hex",
+      "required": true,
       "env_variable": "USCIS_TRACKER_DB"
     },
     {

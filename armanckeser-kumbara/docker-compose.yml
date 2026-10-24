@@ -9,11 +9,13 @@ services:
     restart: on-failure
     stop_grace_period: 1m
     environment:
-      DATABASE_URL: postgresql://postgres:${APP_ARMANCKESER_KUMBARA_DB}@postgres:5432/app
-      ELECTRIC_URL: http://electric:3000
+      DATABASE_URL: postgresql://postgres:${APP_ARMANCKESER_KUMBARA_DB}@armanckeser-kumbara_postgres_1:5432/app
+      ELECTRIC_URL: http://armanckeser-kumbara_electric_1:3000
     depends_on:
-      - postgres
-      - electric
+      postgres:
+        condition: service_healthy
+      electric:
+        condition: service_started
   postgres:
     image: postgres:16-alpine
     restart: on-failure
@@ -44,10 +46,11 @@ services:
     restart: on-failure
     stop_grace_period: 1m
     environment:
-      DATABASE_URL: postgresql://postgres:${APP_ARMANCKESER_KUMBARA_DB}@postgres:5432/app?sslmode=disable
+      DATABASE_URL: postgresql://postgres:${APP_ARMANCKESER_KUMBARA_DB}@armanckeser-kumbara_postgres_1:5432/app?sslmode=disable
       ELECTRIC_INSECURE: "true"
       ELECTRIC_STORAGE_DIR: /var/lib/electric/persistent
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     volumes:
       - ${APP_DATA_DIR}/data/electricdata:/var/lib/electric/persistent

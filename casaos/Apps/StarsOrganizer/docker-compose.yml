@@ -10,8 +10,10 @@ services:
       GITHUB_TOKEN: ""
       AUTH_PASSWORD: ""
     depends_on:
-      - postgres
-      - electric
+      postgres:
+        condition: service_healthy
+      electric:
+        condition: service_started
     ports:
       - target: 8080
         published: "5184"
@@ -20,10 +22,10 @@ services:
       envs:
         - container: GITHUB_TOKEN
           description:
-            en_US: GitHub token (classic, repo scope)
+            en_US: GitHub token (classic, repo scope). Create one at https://github.com/settings/tokens/new?scopes=repo
         - container: AUTH_PASSWORD
           description:
-            en_US: Password for the app (leave empty for no login)
+            en_US: Password for the app (leave empty for no login). Set one if anyone else on your network can reach this server.
       ports:
         - container: "8080"
           description:
@@ -64,7 +66,8 @@ services:
       ELECTRIC_INSECURE: "true"
       ELECTRIC_STORAGE_DIR: /var/lib/electric/persistent
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     volumes:
       - type: bind
         source: /DATA/AppData/$AppID/electricdata
@@ -101,6 +104,11 @@ x-casaos:
   port_map: "5184"
   scheme: http
   version: 1.2.1
+  update_at: 2026-10-24
+  release_notes:
+    en_US: |-
+      - With no GitHub token set, **Import Stars** now shows a **Create one** link that opens GitHub with the `repo` scope ticked.
+      - The app-store icon has transparent corners.
   website: https://github.com/armanckeser/github-stars-organizer
   repo: https://github.com/armanckeser/github-stars-organizer
   support: https://github.com/armanckeser/github-stars-organizer/issues

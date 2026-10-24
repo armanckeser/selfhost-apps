@@ -6,7 +6,7 @@
   "author": "Armanc Keser",
   "port": 5184,
   "categories": [
-    "utilities"
+    "development"
   ],
   "description": "Search, tag, rate and sort your GitHub stars into GitHub Lists.",
   "tipi_version": 1002001,
@@ -24,6 +24,8 @@
       "type": "random",
       "label": "db secret",
       "min": 32,
+      "encoding": "hex",
+      "required": true,
       "env_variable": "GITHUB_STARS_ORGANIZER_DB"
     },
     {

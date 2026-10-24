@@ -2,6 +2,11 @@
   "cosmos-installer": {
     "form": [
       {
+        "name": "AUTH_PASSWORD_help",
+        "label": "Set one if anyone else on your network can reach this server.",
+        "type": "info"
+      },
+      {
         "name": "AUTH_PASSWORD",
         "label": "Password for the app (leave empty for no login)",
         "initialValue": "",
