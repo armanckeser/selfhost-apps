@@ -47,9 +47,22 @@ export function cosmos(model, { pages }) {
       },
       networks: { "{ServiceName}": {} },
     };
-    if (resolved.command) entry.command = resolved.command;
-    if (resolved.healthcheck) entry.healthcheck = resolved.healthcheck;
-    if (resolved.depends_on) entry.depends_on = resolved.depends_on.map((other) => serviceName(model, other));
+    // A string, which Cosmos splits on whitespace (strings.Fields), so no argument may contain a space.
+    if (resolved.command) {
+      const args = [resolved.command].flat();
+      if (args.some((arg) => /\s/.test(arg))) throw new Error(`Cosmos: ${model.id} ${key} has a command argument with a space`);
+      entry.command = args.join(" ");
+    }
+    // Cosmos decodes these into Go structs (src/docker/api_blueprint.go), not compose: healthcheck
+    // durations are whole seconds, and depends_on is a map of service → { condition }. A compose-style
+    // "5s" or a list makes the install request fail to decode.
+    if (resolved.healthcheck) entry.healthcheck = cosmosHealthcheck(resolved.healthcheck);
+    if (resolved.depends_on) {
+      entry.depends_on = Object.fromEntries(resolved.depends_on.map((other) => [
+        serviceName(model, other),
+        { condition: model.services[other]?.healthcheck ? "service_healthy" : "service_started" },
+      ]));
+    }
     if (resolved.volumes) {
       entry.volumes = Object.entries(resolved.volumes).map(([volume, target]) => ({
         source: `{ServiceName}-${volume}`,
@@ -74,6 +87,7 @@ export function cosmos(model, { pages }) {
         },
       ];
     }
+    checkCosmosTypes(`${model.id} ${key}`, entry);
     services[name] = entry;
   }
 
@@ -138,6 +152,50 @@ export function cosmosIndex(listings, store) {
     "site/servapps.json": json({ source: `${store.pages}/servapps.json`, showcase: [], all: servapps }),
     "site/index.json": json({ source: `${store.pages}/index.json`, showcase: [], all: servapps }),
   };
+}
+
+const seconds = (value) => {
+  if (typeof value === "number") return value;
+  const match = /^(\d+)(ms|s|m|h)?$/.exec(String(value));
+  if (!match) throw new Error(`Cosmos: cannot read the duration ${value}`);
+  const amount = Number(match[1]);
+  return { ms: amount / 1000, s: amount, m: amount * 60, h: amount * 3600 }[match[2] ?? "s"];
+};
+
+const cosmosHealthcheck = ({ test, interval, timeout, retries, start_period }) => ({
+  test,
+  ...(interval !== undefined ? { interval: seconds(interval) } : {}),
+  ...(timeout !== undefined ? { timeout: seconds(timeout) } : {}),
+  ...(retries !== undefined ? { retries } : {}),
+  ...(start_period !== undefined ? { start_period: seconds(start_period) } : {}),
+});
+
+// The field types of Cosmos's ContainerCreateRequestContainer (src/docker/api_blueprint.go) for every
+// field written above. Go's decoder refuses a mismatch, and Cosmos then fails the install, so a mismatch
+// fails the build here instead.
+const isStrings = (value) => Array.isArray(value) && value.every((item) => typeof item === "string");
+const isStringMap = (value) => value && typeof value === "object" && !Array.isArray(value) && Object.values(value).every((item) => typeof item === "string");
+const isObjectMap = (value) => value && typeof value === "object" && !Array.isArray(value) && Object.values(value).every((item) => item && typeof item === "object" && !Array.isArray(item));
+const COSMOS_TYPES = {
+  image: (v) => typeof v === "string",
+  container_name: (v) => typeof v === "string",
+  hostname: (v) => typeof v === "string",
+  restart: (v) => typeof v === "string",
+  command: (v) => typeof v === "string",
+  environment: isStrings,
+  labels: isStringMap,
+  networks: isObjectMap,
+  depends_on: isObjectMap,
+  volumes: (v) => Array.isArray(v) && v.every((m) => typeof m.source === "string" && typeof m.target === "string" && typeof m.type === "string"),
+  routes: Array.isArray,
+  healthcheck: (v) => isStrings(v.test) && ["interval", "timeout", "retries", "start_period"].every((k) => v[k] === undefined || Number.isInteger(v[k])),
+};
+function checkCosmosTypes(where, entry) {
+  for (const [field, value] of Object.entries(entry)) {
+    const check = COSMOS_TYPES[field];
+    if (!check) throw new Error(`Cosmos: ${where} writes ${field}, which has no type check here`);
+    if (!check(value)) throw new Error(`Cosmos: ${where} ${field} is not the type Cosmos decodes`);
+  }
 }
 
 const json = (value) => `${JSON.stringify(value, null, 2)}\n`;
