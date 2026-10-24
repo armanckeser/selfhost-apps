@@ -41,9 +41,11 @@
       "networks": {
         "{ServiceName}": {}
       },
-      "depends_on": [
-        "{ServiceName}-postgres"
-      ],
+      "depends_on": {
+        "{ServiceName}-postgres": {
+          "condition": "service_healthy"
+        }
+      },
       "routes": [
         {
           "name": "{ServiceName}",
@@ -86,8 +88,8 @@
           "CMD-SHELL",
           "pg_isready -U postgres -d app"
         ],
-        "interval": "5s",
-        "timeout": "5s",
+        "interval": 5,
+        "timeout": 5,
         "retries": 20
       },
       "volumes": [

@@ -49,10 +49,14 @@
       "networks": {
         "{ServiceName}": {}
       },
-      "depends_on": [
-        "{ServiceName}-postgres",
-        "{ServiceName}-electric"
-      ],
+      "depends_on": {
+        "{ServiceName}-postgres": {
+          "condition": "service_healthy"
+        },
+        "{ServiceName}-electric": {
+          "condition": "service_started"
+        }
+      },
       "routes": [
         {
           "name": "{ServiceName}",
@@ -90,22 +94,14 @@
       "networks": {
         "{ServiceName}": {}
       },
-      "command": [
-        "postgres",
-        "-c",
-        "wal_level=logical",
-        "-c",
-        "max_replication_slots=10",
-        "-c",
-        "max_wal_senders=10"
-      ],
+      "command": "postgres -c wal_level=logical -c max_replication_slots=10 -c max_wal_senders=10",
       "healthcheck": {
         "test": [
           "CMD-SHELL",
           "pg_isready -U postgres"
         ],
-        "interval": "5s",
-        "timeout": "5s",
+        "interval": 5,
+        "timeout": 5,
         "retries": 20
       },
       "volumes": [
@@ -136,9 +132,11 @@
       "networks": {
         "{ServiceName}": {}
       },
-      "depends_on": [
-        "{ServiceName}-postgres"
-      ],
+      "depends_on": {
+        "{ServiceName}-postgres": {
+          "condition": "service_healthy"
+        }
+      },
       "volumes": [
         {
           "source": "{ServiceName}-electricdata",
