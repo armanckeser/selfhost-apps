@@ -24,9 +24,10 @@ checkout.
 docker compose -f oci://ghcr.io/armanckeser/<app>-stack:latest up -d
 ```
 
-Cosmos and Umbrel ask who you are before a request reaches an app. CasaOS, Runtipi, Unraid and Portainer
-don't, so their install forms offer the app's own password (`AUTH_PASSWORD`). Set one if anyone else on
-your network can reach the server.
+Umbrel asks who you are before a request reaches an app. CasaOS, Runtipi, Unraid and Portainer don't, so
+their install forms offer the app's own password (`AUTH_PASSWORD`); set one if anyone else on your network
+can reach the server. Cosmos has its own login too, but its redirect breaks apps added to a phone's home
+screen, so Cosmos's form also offers the password: set it, then turn off Cosmos's login on the app's URL.
 
 ## How it works
 
