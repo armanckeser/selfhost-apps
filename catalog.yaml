@@ -1,0 +1,18 @@
+# The apps in this catalog. Each entry is a public repo whose latest release carries selfhost/app.yaml
+# (the agent-first-apps template ships one). `npm run generate` reads every manifest at its release tag
+# and writes the store packages; CI runs it daily and whenever an app publishes a release.
+store:
+  id: armanckeser
+  name: Armanc's apps
+  description: Self-hosted apps by Armanc Keser. Each one runs on a Raspberry Pi and installs in one click.
+  maintainer: Armanc Keser
+  url: https://github.com/armanckeser/selfhost-apps
+  # Where the generated site is served (GitHub Pages of this repo).
+  pages: https://armanckeser.github.io/selfhost-apps
+
+apps:
+  - repo: armanckeser/github-stars-organizer
+  - repo: armanckeser/kumbara
+  - repo: armanckeser/wishlist
+  - repo: armanckeser/jellymeme
+  - repo: armanckeser/uscis-tracker

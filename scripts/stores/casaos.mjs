@@ -1,0 +1,95 @@
+// CasaOS / ZimaOS: a third-party store is a zip whose top folder holds Apps/<App>/docker-compose.yml
+// (with x-casaos metadata) plus an icon. CI pushes these folders to this repo's `casaos` branch, and people
+// add https://github.com/<owner>/selfhost-apps/archive/refs/heads/casaos.zip under App Store → Add source.
+//
+// CasaOS has no secret generator and no login in front of apps. Database passwords are therefore fixed
+// per app (the databases are never published outside the app's own network), and the install offers the
+// app's own AUTH_PASSWORD when the app has one.
+import { createHash } from "node:crypto";
+import { stringify } from "yaml";
+import { AUTH_FIELD, substitute } from "../model.mjs";
+
+const folder = (model) => model.name.replace(/[^A-Za-z0-9]/g, "");
+
+export function casaos(model, store) {
+  const appId = `${store.id}-${model.id}`;
+  const fixedSecret = (name) => createHash("sha256").update(`${appId}:${name}`).digest("hex").slice(0, 32);
+  const resolve = (kind, name) =>
+    kind === "secret" ? fixedSecret(name)
+      : kind === "host" ? `${appId}-${name}`
+      : kind === "input" ? ""
+      : model.version;
+  const fields = model.auth === "builtin" ? [...model.env, AUTH_FIELD] : model.env;
+
+  const services = {};
+  for (const [key, service] of Object.entries(model.services)) {
+    const resolved = substitute(service, resolve);
+    const environment = { ...(resolved.environment ?? {}) };
+    if (key === model.main) for (const field of fields) environment[field.name] = field.default ?? "";
+    const entry = {
+      image: resolved.image,
+      container_name: `${appId}-${key}`,
+      restart: "unless-stopped",
+      environment,
+    };
+    if (resolved.command) entry.command = resolved.command;
+    if (resolved.healthcheck) entry.healthcheck = resolved.healthcheck;
+    if (resolved.depends_on) entry.depends_on = resolved.depends_on;
+    if (resolved.volumes) {
+      entry.volumes = Object.entries(resolved.volumes).map(([volume, target]) => ({
+        type: "bind",
+        source: `/DATA/AppData/$AppID/${volume}`,
+        target,
+      }));
+    }
+    if (key === model.main) {
+      entry.ports = [{ target: model.port, published: String(model.hostPort), protocol: "tcp" }];
+      entry["x-casaos"] = {
+        envs: fields.map((field) => ({ container: field.name, description: { en_US: field.label } })),
+        ports: [{ container: String(model.port), description: { en_US: "Web UI" } }],
+      };
+    }
+    services[key] = entry;
+  }
+
+  const base = `https://cdn.jsdelivr.net/gh/${store.repo}@casaos/Apps/${folder(model)}`;
+  const compose = {
+    name: appId,
+    services,
+    "x-casaos": {
+      id: appId,
+      architectures: model.architectures,
+      main: model.main,
+      author: store.maintainer,
+      developer: model.developer,
+      category: casaCategory(model.category),
+      icon: `${base}/icon.png`,
+      thumbnail: model.assets.screenshots.length > 0 ? `${base}/screenshot-1.png` : `${base}/icon.png`,
+      screenshot_link: model.assets.screenshots.map((_, index) => `${base}/screenshot-${index + 1}.png`),
+      title: { en_US: model.name },
+      tagline: { en_US: model.tagline },
+      description: { en_US: model.description },
+      tips: model.auth === "builtin"
+        ? { before_install: { en_US: "Set AUTH_PASSWORD if anyone else on your network can reach this server; leave it empty for no login." } }
+        : {},
+      index: "/",
+      port_map: String(model.hostPort),
+      scheme: "http",
+      version: model.version,
+      website: model.website,
+      repo: model.repo,
+      support: model.support,
+    },
+  };
+
+  return {
+    files: {
+      [`casaos/Apps/${folder(model)}/docker-compose.yml`]: stringify(compose, { lineWidth: 0 }),
+      [`casaos/Apps/${folder(model)}/icon.png`]: { copy: model.assets.icon },
+      ...Object.fromEntries(model.assets.screenshots.map((file, index) => [`casaos/Apps/${folder(model)}/screenshot-${index + 1}.png`, { copy: file }])),
+    },
+  };
+}
+
+const casaCategory = (category) =>
+  ({ productivity: "Productivity", finance: "Finance", media: "Media", development: "Developer", home: "Home Automation", social: "Social", ai: "AI", utilities: "Utilities" })[category] ?? "Utilities";

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<CommunityApplications>
+  <Profile>Self-hosted apps by Armanc Keser. Every app here is an all-in-one container: map one appdata folder and open the web UI. Support for each app is on its GitHub issues page.</Profile>
+  <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/icon.png</Icon>
+  <WebPage>https://github.com/armanckeser/selfhost-apps</WebPage>
+</CommunityApplications>

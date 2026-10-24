@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Kumbara</Name>
+  <Repository>ghcr.io/armanckeser/kumbara:aio</Repository>
+  <Registry>https://ghcr.io/armanckeser/kumbara</Registry>
+  <Network>bridge</Network>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/armanckeser/kumbara/issues</Support>
+  <Project>https://github.com/armanckeser/kumbara</Project>
+  <Overview>Budgeting that files your bank feed for you and opens instantly on your phone.
+
+Kumbara pulls your bank transactions through SimpleFIN and files what it recognizes. For the rest it asks once per merchant, and one answer covers every charge from that merchant. Transfers between your own accounts are paired, so they never count as spending.
+
+The budget is Needs, Wants and Savings, with what is left per day. It also tracks stock grants, investments, and paychecks from gross to net.
+
+Kumbara is a phone app you install from the browser. Every screen loads from data already on your phone, so it opens instantly. Connect your bank from the app with a SimpleFIN setup token (SimpleFIN costs about $15 a year, paid to them). Single household.</Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/kumbara.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/kumbara.png</Icon>
+  <Changes>0.0.0</Changes>
+  <License>AGPL-3.0-or-later</License>
+  <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/kumbara-1.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/kumbara-2.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/kumbara-3.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/kumbara-4.png</Screenshot>
+  <Config Name="Web UI" Target="8080" Default="5182" Mode="tcp" Description="Port for the web app." Type="Port" Display="always" Required="true" Mask="false">5182</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/kumbara" Mode="rw" Description="Everything the app keeps: its database and settings. Back this up." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/kumbara</Config>
+  <Config Name="Password for the app (leave empty for no login)" Target="AUTH_PASSWORD" Default="" Description="Set one if anyone else on your network can reach this server." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="Time zone" Target="TZ" Default="UTC" Description="Time zone, e.g. America/New_York." Type="Variable" Display="advanced" Required="false" Mask="false">UTC</Config>
+</Container>

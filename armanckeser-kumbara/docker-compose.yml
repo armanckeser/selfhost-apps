@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+  app_proxy:
+    environment:
+      APP_HOST: armanckeser-kumbara_app_1
+      APP_PORT: 8080
+  app:
+    image: ghcr.io/armanckeser/kumbara:0.0.0
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      DATABASE_URL: postgresql://postgres:${APP_ARMANCKESER_KUMBARA_DB}@postgres:5432/app
+      ELECTRIC_URL: http://electric:3000
+    depends_on:
+      - postgres
+      - electric
+  postgres:
+    image: postgres:16-alpine
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${APP_ARMANCKESER_KUMBARA_DB}
+    command:
+      - postgres
+      - -c
+      - wal_level=logical
+      - -c
+      - max_replication_slots=10
+      - -c
+      - max_wal_senders=10
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - ${APP_DATA_DIR}/data/pgdata:/var/lib/postgresql/data
+  electric:
+    image: electricsql/electric:1.7.6
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      DATABASE_URL: postgresql://postgres:${APP_ARMANCKESER_KUMBARA_DB}@postgres:5432/app?sslmode=disable
+      ELECTRIC_INSECURE: "true"
+      ELECTRIC_STORAGE_DIR: /var/lib/electric/persistent
+    depends_on:
+      - postgres
+    volumes:
+      - ${APP_DATA_DIR}/data/electricdata:/var/lib/electric/persistent

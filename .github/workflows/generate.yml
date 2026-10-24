@@ -1,0 +1,61 @@
+name: Generate store packages
+
+# Rebuild every store package from the apps' latest releases: daily, by hand, or when an app's release
+# workflow sends `repository_dispatch` (type app-released). Commits the output to main, pushes casaos/ to the
+# `casaos` branch (CasaOS reads a zip whose top folder holds Apps/), and publishes site/ to Pages.
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [app-released]
+  push:
+    branches: [main]
+    paths: ['catalog.yaml', 'scripts/**']
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: generate
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci
+      - run: npm run generate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit the output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Regenerate store packages"
+          git push
+      - name: Push the CasaOS store branch
+        run: |
+          rm -rf /tmp/casaos && cp -r casaos /tmp/casaos
+          git checkout --orphan casaos-build
+          git rm -rf -q .
+          cp -r /tmp/casaos/. .
+          git add -A
+          git commit -q -m "CasaOS store from ${GITHUB_SHA::7}"
+          git push -f origin HEAD:casaos
+          git checkout -q main
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - uses: actions/deploy-pages@v4

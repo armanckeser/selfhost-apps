@@ -1,0 +1,30 @@
+manifestVersion: 1
+id: armanckeser-kumbara
+category: finance
+name: Kumbara
+version: 0.0.0
+tagline: Budgeting that files your bank feed for you and opens instantly on your phone.
+icon: https://armanckeser.github.io/selfhost-apps/umbrel/kumbara/icon.png
+description: |-
+  Kumbara pulls your bank transactions through SimpleFIN and files what it recognizes. For the rest it asks once per merchant, and one answer covers every charge from that merchant. Transfers between your own accounts are paired, so they never count as spending.
+
+  The budget is Needs, Wants and Savings, with what is left per day. It also tracks stock grants, investments, and paychecks from gross to net.
+
+  Kumbara is a phone app you install from the browser. Every screen loads from data already on your phone, so it opens instantly. Connect your bank from the app with a SimpleFIN setup token (SimpleFIN costs about $15 a year, paid to them). Single household.
+developer: Armanc Keser
+website: https://github.com/armanckeser/kumbara
+submitter: Armanc Keser
+submission: https://github.com/armanckeser/selfhost-apps
+repo: https://github.com/armanckeser/kumbara
+support: https://github.com/armanckeser/kumbara/issues
+port: 5182
+gallery:
+  - https://armanckeser.github.io/selfhost-apps/umbrel/kumbara/1.png
+  - https://armanckeser.github.io/selfhost-apps/umbrel/kumbara/2.png
+  - https://armanckeser.github.io/selfhost-apps/umbrel/kumbara/3.png
+  - https://armanckeser.github.io/selfhost-apps/umbrel/kumbara/4.png
+path: ""
+releaseNotes: ""
+dependencies: []
+defaultUsername: ""
+defaultPassword: ""
