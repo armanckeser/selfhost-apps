@@ -80,6 +80,35 @@
     {
       "id": 3,
       "type": 3,
+      "title": "Wishlist",
+      "name": "wishlist",
+      "description": "A wishlist that makes you wait before you buy.",
+      "note": "Wishlist gives you an allowance that grows by the second. Paste a product link and the name, photo and price fill in; prices are checked daily and you are told when they drop. Open http://&lt;server&gt;:5185 after it starts.",
+      "categories": [
+        "shopping"
+      ],
+      "platform": "linux",
+      "logo": "https://armanckeser.github.io/selfhost-apps/portainer/wishlist.png",
+      "repository": {
+        "url": "https://github.com/armanckeser/wishlist",
+        "stackfile": "docker-compose.selfhost.yml"
+      },
+      "env": [
+        {
+          "name": "TAG",
+          "label": "Version",
+          "default": "0.33.0"
+        },
+        {
+          "name": "PORT",
+          "label": "Web port on this server",
+          "default": "5185"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": 3,
       "title": "Jellymeme",
       "name": "jellymeme",
       "description": "Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.",
@@ -113,7 +142,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 5,
       "type": 3,
       "title": "USCIS Tracker",
       "name": "uscis-tracker",

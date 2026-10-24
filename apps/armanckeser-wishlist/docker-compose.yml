@@ -1,0 +1,36 @@
+services:
+  app:
+    image: ghcr.io/armanckeser/wishlist:0.33.0
+    container_name: armanckeser-wishlist-app
+    restart: unless-stopped
+    environment:
+      POSTGRES_SERVER: armanckeser-wishlist-postgres
+      POSTGRES_DB: wishlist
+      POSTGRES_USER: wishlist
+      POSTGRES_PASSWORD: ${WISHLIST_DB}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    x-runtipi:
+      is_main: true
+      internal_port: 8080
+  postgres:
+    image: postgres:17
+    container_name: armanckeser-wishlist-postgres
+    restart: unless-stopped
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: wishlist
+      POSTGRES_USER: wishlist
+      POSTGRES_PASSWORD: ${WISHLIST_DB}
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U wishlist -d wishlist
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - ${APP_DATA_DIR}/data/pgdata:/var/lib/postgresql/data/pgdata
+x-runtipi:
+  schema_version: 2

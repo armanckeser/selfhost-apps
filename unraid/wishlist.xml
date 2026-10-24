@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Wishlist</Name>
+  <Repository>ghcr.io/armanckeser/wishlist:aio</Repository>
+  <Registry>https://ghcr.io/armanckeser/wishlist</Registry>
+  <Network>bridge</Network>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/armanckeser/wishlist/issues</Support>
+  <Project>https://github.com/armanckeser/wishlist</Project>
+  <Overview>A wishlist that makes you wait before you buy.
+
+Wishlist gives you an allowance that grows by the second. Paste a product link and the name, photo and price fill in; prices are checked daily and you are told when they drop.
+
+Each item has to cool off before it is ready to buy, by a rule you set such as 3 days for every $100. Buying before then freezes your balance for 7 days. Friends can gift an item from a list you share.
+
+Open the app after installing and sign up: the first account is yours.</Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/wishlist.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/wishlist.png</Icon>
+  <Changes>0.33.0: - Wishlist now installs from the app stores of Cosmos, Umbrel, CasaOS/ZimaOS, Runtipi, Unraid and Portainer, through https://github.com/armanckeser/selfhost-apps. Or with one command and no checkout: `docker compose -f oci://ghcr.io/armanckeser/wishlist-stack:latest up -d`.</Changes>
+  <License>AGPL-3.0-or-later</License>
+  <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/wishlist-1.png</Screenshot>
+  <Config Name="Web UI" Target="8080" Default="5185" Mode="tcp" Description="Port for the web app." Type="Port" Display="always" Required="true" Mask="false">5185</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/wishlist" Mode="rw" Description="Everything the app keeps: its database and settings. Back this up." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/wishlist</Config>
+  <Config Name="Time zone" Target="TZ" Default="UTC" Description="Time zone, e.g. America/New_York." Type="Variable" Display="advanced" Required="false" Mask="false">UTC</Config>
+</Container>
