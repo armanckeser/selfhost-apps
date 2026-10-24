@@ -20,7 +20,7 @@
         {
           "name": "TAG",
           "label": "Version",
-          "default": "1.2.0"
+          "default": "1.2.1"
         },
         {
           "name": "PORT",

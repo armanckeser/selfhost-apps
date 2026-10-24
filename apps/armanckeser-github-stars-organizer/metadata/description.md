@@ -4,6 +4,6 @@ Stars Organizer imports every repo you have starred on GitHub into one searchabl
 
 Explore finds repos you starred and forgot, and the ones that went quiet or were archived, so you can unstar them in bulk.
 
-Needs a classic GitHub token with the repo scope, which you paste into the install form. Tags, ratings and notes stay in this server's database; Lists and unstars are written to GitHub. Not affiliated with GitHub.
+Needs a classic GitHub token with the repo scope, which you paste into the install form. Create one at https://github.com/settings/tokens/new?scopes=repo Tags, ratings and notes stay in this server's database; Lists and unstars are written to GitHub. Not affiliated with GitHub.
 
 Source: https://github.com/armanckeser/github-stars-organizer

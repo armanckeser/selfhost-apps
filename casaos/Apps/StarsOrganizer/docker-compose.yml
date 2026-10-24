@@ -1,7 +1,7 @@
 name: armanckeser-github-stars-organizer
 services:
   app:
-    image: ghcr.io/armanckeser/github-stars-organizer:1.2.0
+    image: ghcr.io/armanckeser/github-stars-organizer:1.2.1
     container_name: armanckeser-github-stars-organizer-app
     restart: unless-stopped
     environment:
@@ -93,14 +93,14 @@ x-casaos:
 
       Explore finds repos you starred and forgot, and the ones that went quiet or were archived, so you can unstar them in bulk.
 
-      Needs a classic GitHub token with the repo scope, which you paste into the install form. Tags, ratings and notes stay in this server's database; Lists and unstars are written to GitHub. Not affiliated with GitHub.
+      Needs a classic GitHub token with the repo scope, which you paste into the install form. Create one at https://github.com/settings/tokens/new?scopes=repo Tags, ratings and notes stay in this server's database; Lists and unstars are written to GitHub. Not affiliated with GitHub.
   tips:
     before_install:
       en_US: Set AUTH_PASSWORD if anyone else on your network can reach this server; leave it empty for no login.
   index: /
   port_map: "5184"
   scheme: http
-  version: 1.2.0
+  version: 1.2.1
   website: https://github.com/armanckeser/github-stars-organizer
   repo: https://github.com/armanckeser/github-stars-organizer
   support: https://github.com/armanckeser/github-stars-organizer/issues
