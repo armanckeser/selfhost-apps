@@ -1,0 +1,142 @@
+{
+  "version": "3",
+  "templates": [
+    {
+      "type": 3,
+      "title": "Stars Organizer",
+      "name": "github-stars-organizer",
+      "description": "Search, tag, rate and sort your GitHub stars into GitHub Lists.",
+      "note": "Stars Organizer imports every repo you have starred on GitHub into one searchable table, with language, stars, last push and a health score. Tag repos, rate them, write notes, and sort them into GitHub Lists. Lists you make here are real GitHub Lists, so they show on your profile. Open http://&lt;server&gt;:5184 after it starts.",
+      "categories": [
+        "developer"
+      ],
+      "platform": "linux",
+      "logo": "https://armanckeser.github.io/selfhost-apps/portainer/github-stars-organizer.png",
+      "repository": {
+        "url": "https://github.com/armanckeser/github-stars-organizer",
+        "stackfile": "docker-compose.selfhost.yml"
+      },
+      "env": [
+        {
+          "name": "TAG",
+          "label": "Version",
+          "default": "1.2.0"
+        },
+        {
+          "name": "PORT",
+          "label": "Web port on this server",
+          "default": "5184"
+        },
+        {
+          "name": "GITHUB_TOKEN",
+          "label": "GitHub token (classic, repo scope)",
+          "default": ""
+        },
+        {
+          "name": "AUTH_PASSWORD",
+          "label": "Password for the app (leave empty for no login)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 3,
+      "title": "Kumbara",
+      "name": "kumbara",
+      "description": "Budgeting that files your bank feed for you and opens instantly on your phone.",
+      "note": "Kumbara pulls your bank transactions through SimpleFIN and files what it recognizes. For the rest it asks once per merchant, and one answer covers every charge from that merchant. Transfers between your own accounts are paired, so they never count as spending. Open http://&lt;server&gt;:5182 after it starts.",
+      "categories": [
+        "finance"
+      ],
+      "platform": "linux",
+      "logo": "https://armanckeser.github.io/selfhost-apps/portainer/kumbara.png",
+      "repository": {
+        "url": "https://github.com/armanckeser/kumbara",
+        "stackfile": "app/docker-compose.selfhost.yml"
+      },
+      "env": [
+        {
+          "name": "TAG",
+          "label": "Version",
+          "default": "0.22.0"
+        },
+        {
+          "name": "PORT",
+          "label": "Web port on this server",
+          "default": "5182"
+        },
+        {
+          "name": "AUTH_PASSWORD",
+          "label": "Password for the app (leave empty for no login)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 3,
+      "title": "Jellymeme",
+      "name": "jellymeme",
+      "description": "Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.",
+      "note": "Describe a moment the way you'd tell a friend, \"when he admits the robot hand freaks him out\", and Jellymeme finds it in your Jellyfin library. Trim it to the line you want, burn in the subtitles or your own caption, and export a GIF, a clip or a still. Open http://&lt;server&gt;:3000 after it starts.",
+      "categories": [
+        "media"
+      ],
+      "platform": "linux",
+      "logo": "https://armanckeser.github.io/selfhost-apps/portainer/jellymeme.png",
+      "repository": {
+        "url": "https://github.com/armanckeser/jellymeme",
+        "stackfile": "docker-compose.selfhost.yml"
+      },
+      "env": [
+        {
+          "name": "TAG",
+          "label": "Version",
+          "default": "1.1.0"
+        },
+        {
+          "name": "PORT",
+          "label": "Web port on this server",
+          "default": "3000"
+        },
+        {
+          "name": "AUTH_PASSWORD",
+          "label": "Password for the app (leave empty for no login)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": 3,
+      "title": "USCIS Tracker",
+      "name": "uscis-tracker",
+      "description": "Know what moved on your green card case, and when your date comes up.",
+      "note": "One tap from a signed-in my.uscis.gov tab reads every case in your household. The tracker keeps the full history, shows what changed since you last looked (including the updates USCIS never announces), and estimates when the visa bulletin will reach your priority date. Open http://&lt;server&gt;:5181 after it starts.",
+      "categories": [
+        "utilities"
+      ],
+      "platform": "linux",
+      "logo": "https://armanckeser.github.io/selfhost-apps/portainer/uscis-tracker.png",
+      "repository": {
+        "url": "https://github.com/armanckeser/uscis-tracker",
+        "stackfile": "docker-compose.selfhost.yml"
+      },
+      "env": [
+        {
+          "name": "TAG",
+          "label": "Version",
+          "default": "0.3.0"
+        },
+        {
+          "name": "PORT",
+          "label": "Web port on this server",
+          "default": "5181"
+        },
+        {
+          "name": "AUTH_PASSWORD",
+          "label": "Password for the app (leave empty for no login)",
+          "default": ""
+        }
+      ]
+    }
+  ]
+}

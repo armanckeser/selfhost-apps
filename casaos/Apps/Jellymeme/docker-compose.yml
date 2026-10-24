@@ -1,0 +1,59 @@
+name: armanckeser-jellymeme
+services:
+  app:
+    image: ghcr.io/armanckeser/jellymeme:1.1.0
+    container_name: armanckeser-jellymeme-app
+    restart: unless-stopped
+    environment:
+      AUTH_PASSWORD: ""
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /data
+    ports:
+      - target: 8080
+        published: "3000"
+        protocol: tcp
+    x-casaos:
+      envs:
+        - container: AUTH_PASSWORD
+          description:
+            en_US: Password for the app (leave empty for no login)
+      ports:
+        - container: "8080"
+          description:
+            en_US: Web UI
+x-casaos:
+  id: armanckeser-jellymeme
+  architectures:
+    - amd64
+    - arm64
+  main: app
+  author: Armanc Keser
+  developer: Armanc Keser
+  category: Media
+  icon: https://cdn.jsdelivr.net/gh/armanckeser/selfhost-apps@casaos/Apps/Jellymeme/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/armanckeser/selfhost-apps@casaos/Apps/Jellymeme/screenshot-1.png
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/armanckeser/selfhost-apps@casaos/Apps/Jellymeme/screenshot-1.png
+  title:
+    en_US: Jellymeme
+  tagline:
+    en_US: Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.
+  description:
+    en_US: |-
+      Describe a moment the way you'd tell a friend, "when he admits the robot hand freaks him out", and Jellymeme finds it in your Jellyfin library. Trim it to the line you want, burn in the subtitles or your own caption, and export a GIF, a clip or a still.
+
+      Paste a list of scenes, such as the replies to a "best scenes in this show" thread, and every line becomes a clip in one montage.
+
+      Jellymeme reads subtitles and video through Jellyfin's HTTP API, so it needs no access to your media files. Connect your Jellyfin server and an API key in Settings after installing. Indexing and rendering use the CPU; a Raspberry Pi works but is slow.
+  tips:
+    before_install:
+      en_US: Set AUTH_PASSWORD if anyone else on your network can reach this server; leave it empty for no login.
+  index: /
+  port_map: "3000"
+  scheme: http
+  version: 1.1.0
+  website: https://github.com/armanckeser/jellymeme
+  repo: https://github.com/armanckeser/jellymeme
+  support: https://github.com/armanckeser/jellymeme/issues

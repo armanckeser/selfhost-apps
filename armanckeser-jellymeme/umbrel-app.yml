@@ -1,0 +1,31 @@
+manifestVersion: 1
+id: armanckeser-jellymeme
+category: media
+name: Jellymeme
+version: 1.1.0
+tagline: Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.
+icon: https://armanckeser.github.io/selfhost-apps/umbrel/jellymeme/icon.png
+description: |-
+  Describe a moment the way you'd tell a friend, "when he admits the robot hand freaks him out", and Jellymeme finds it in your Jellyfin library. Trim it to the line you want, burn in the subtitles or your own caption, and export a GIF, a clip or a still.
+
+  Paste a list of scenes, such as the replies to a "best scenes in this show" thread, and every line becomes a clip in one montage.
+
+  Jellymeme reads subtitles and video through Jellyfin's HTTP API, so it needs no access to your media files. Connect your Jellyfin server and an API key in Settings after installing. Indexing and rendering use the CPU; a Raspberry Pi works but is slow.
+developer: Armanc Keser
+website: https://github.com/armanckeser/jellymeme
+submitter: Armanc Keser
+submission: https://github.com/armanckeser/selfhost-apps
+repo: https://github.com/armanckeser/jellymeme
+support: https://github.com/armanckeser/jellymeme/issues
+port: 3000
+gallery:
+  - https://armanckeser.github.io/selfhost-apps/umbrel/jellymeme/1.png
+path: ""
+releaseNotes: |-
+  - Installs from the app stores of Cosmos, Umbrel, CasaOS/ZimaOS, Runtipi, Unraid and Portainer, through https://github.com/armanckeser/selfhost-apps. Or with one command and no checkout: `docker compose -f oci://ghcr.io/armanckeser/jellymeme-stack:latest up -d`.
+  - Images for amd64 and arm64: `ghcr.io/armanckeser/jellymeme`.
+  - Optional password: set `AUTH_PASSWORD` and every page asks for it first; a sign-in lasts 180 days.
+  - The container listens on port 8080 (was 3000), and the image is about half its old size.
+dependencies: []
+defaultUsername: ""
+defaultPassword: ""

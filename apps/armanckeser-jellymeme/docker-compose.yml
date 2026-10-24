@@ -1,0 +1,14 @@
+services:
+  app:
+    image: ghcr.io/armanckeser/jellymeme:1.1.0
+    container_name: armanckeser-jellymeme-app
+    restart: unless-stopped
+    environment:
+      AUTH_PASSWORD: ${AUTH_PASSWORD}
+    volumes:
+      - ${APP_DATA_DIR}/data/data:/data
+    x-runtipi:
+      is_main: true
+      internal_port: 8080
+x-runtipi:
+  schema_version: 2

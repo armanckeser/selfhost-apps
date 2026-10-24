@@ -1,0 +1,46 @@
+{
+  "name": "Stars Organizer",
+  "id": "armanckeser-github-stars-organizer",
+  "available": true,
+  "short_desc": "Search, tag, rate and sort your GitHub stars into GitHub Lists.",
+  "author": "Armanc Keser",
+  "port": 5184,
+  "categories": [
+    "utilities"
+  ],
+  "description": "Search, tag, rate and sort your GitHub stars into GitHub Lists.",
+  "tipi_version": 1002000,
+  "version": "1.2.0",
+  "source": "https://github.com/armanckeser/github-stars-organizer",
+  "website": "https://github.com/armanckeser/github-stars-organizer",
+  "exposable": true,
+  "dynamic_config": true,
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ],
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "db secret",
+      "min": 32,
+      "env_variable": "GITHUB_STARS_ORGANIZER_DB"
+    },
+    {
+      "type": "password",
+      "label": "GitHub token (classic, repo scope)",
+      "required": true,
+      "env_variable": "GITHUB_TOKEN",
+      "hint": "Create one at https://github.com/settings/tokens/new?scopes=repo&description=Stars%20Organizer"
+    },
+    {
+      "type": "password",
+      "label": "Password for the app (leave empty for no login)",
+      "required": false,
+      "env_variable": "AUTH_PASSWORD",
+      "hint": "Set one if anyone else on your network can reach this server."
+    }
+  ],
+  "created_at": 1792875184000,
+  "updated_at": 1792875184000
+}

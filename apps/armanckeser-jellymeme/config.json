@@ -1,0 +1,33 @@
+{
+  "name": "Jellymeme",
+  "id": "armanckeser-jellymeme",
+  "available": true,
+  "short_desc": "Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.",
+  "author": "Armanc Keser",
+  "port": 3000,
+  "categories": [
+    "media"
+  ],
+  "description": "Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.",
+  "tipi_version": 1001000,
+  "version": "1.1.0",
+  "source": "https://github.com/armanckeser/jellymeme",
+  "website": "https://github.com/armanckeser/jellymeme",
+  "exposable": true,
+  "dynamic_config": true,
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ],
+  "form_fields": [
+    {
+      "type": "password",
+      "label": "Password for the app (leave empty for no login)",
+      "required": false,
+      "env_variable": "AUTH_PASSWORD",
+      "hint": "Set one if anyone else on your network can reach this server."
+    }
+  ],
+  "created_at": 1792876009000,
+  "updated_at": 1792876009000
+}

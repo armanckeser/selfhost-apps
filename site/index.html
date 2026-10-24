@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Armanc's apps</title>
+<meta name="description" content="Self-hosted apps by Armanc Keser. Each one runs on a Raspberry Pi and installs in one click." />
+<style>
+  :root { --bg: #fafaf9; --fg: #1c1917; --muted: #57534e; --line: #e7e5e4; --card: #ffffff; --accent: #2563eb; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0c0a09; --fg: #f5f5f4; --muted: #a8a29e; --line: #292524; --card: #1c1917; --accent: #60a5fa; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 system-ui, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 8px; } h2 { font-size: 18px; margin: 40px 0 12px; } h3 { font-size: 17px; margin: 0; }
+  p { margin: 4px 0; color: var(--muted); } a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .app { display: flex; gap: 16px; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+  .app img { border-radius: 12px; flex: none; }
+  .app > div { min-width: 0; flex: 1; }
+  .version { font-weight: 400; font-size: 13px; color: var(--muted); }
+  details { margin-top: 8px; } summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+  pre { overflow-x: auto; font-size: 13px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+  .stores li { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .stores span { color: var(--muted); font-size: 15px; overflow-wrap: anywhere; }
+  code { font-size: 13px; overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Armanc's apps</h1>
+  <p>Self-hosted apps by Armanc Keser. Each one runs on a Raspberry Pi and installs in one click.</p>
+  <h2>Apps</h2>
+  <ul>
+      <li class="app">
+        <img src="servapps/github-stars-organizer/icon.png" alt="" width="56" height="56" />
+        <div>
+          <h3><a href="https://github.com/armanckeser/github-stars-organizer">Stars Organizer</a> <span class="version">1.2.0</span></h3>
+          <p>Search, tag, rate and sort your GitHub stars into GitHub Lists.</p>
+          <details>
+            <summary>Docker</summary>
+            <pre>docker compose -f oci://ghcr.io/armanckeser/github-stars-organizer-stack:latest up -d
+docker run -d -p 5184:8080 -v github-stars-organizer:/data ghcr.io/armanckeser/github-stars-organizer:aio</pre>
+          </details>
+        </div>
+      </li>
+      <li class="app">
+        <img src="servapps/kumbara/icon.png" alt="" width="56" height="56" />
+        <div>
+          <h3><a href="https://github.com/armanckeser/kumbara">Kumbara</a> <span class="version">0.22.0</span></h3>
+          <p>Budgeting that files your bank feed for you and opens instantly on your phone.</p>
+          <details>
+            <summary>Docker</summary>
+            <pre>docker compose -f oci://ghcr.io/armanckeser/kumbara-stack:latest up -d
+docker run -d -p 5182:8080 -v kumbara:/data ghcr.io/armanckeser/kumbara:aio</pre>
+          </details>
+        </div>
+      </li>
+      <li class="app">
+        <img src="servapps/jellymeme/icon.png" alt="" width="56" height="56" />
+        <div>
+          <h3><a href="https://github.com/armanckeser/jellymeme">Jellymeme</a> <span class="version">1.1.0</span></h3>
+          <p>Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.</p>
+          <details>
+            <summary>Docker</summary>
+            <pre>docker compose -f oci://ghcr.io/armanckeser/jellymeme-stack:latest up -d</pre>
+          </details>
+        </div>
+      </li>
+      <li class="app">
+        <img src="servapps/uscis-tracker/icon.png" alt="" width="56" height="56" />
+        <div>
+          <h3><a href="https://github.com/armanckeser/uscis-tracker">USCIS Tracker</a> <span class="version">0.3.0</span></h3>
+          <p>Know what moved on your green card case, and when your date comes up.</p>
+          <details>
+            <summary>Docker</summary>
+            <pre>docker compose -f oci://ghcr.io/armanckeser/uscis-tracker-stack:latest up -d
+docker run -d -p 5181:8080 -v uscis-tracker:/data ghcr.io/armanckeser/uscis-tracker:aio</pre>
+          </details>
+        </div>
+      </li></ul>
+  <h2>Add these apps to your server</h2>
+  <ul class="stores"><li><strong>Cosmos</strong><span>Market → Sources → add <code>https://armanckeser.github.io/selfhost-apps/servapps.json</code></span></li><li><strong>Umbrel</strong><span>App Store → ⋯ → Community App Stores → add <code>https://github.com/armanckeser/selfhost-apps</code></span></li><li><strong>CasaOS / ZimaOS</strong><span>App Store → Add source → <code>https://github.com/armanckeser/selfhost-apps/archive/refs/heads/casaos.zip</code></span></li><li><strong>Runtipi</strong><span>Settings → App Stores → Add → <code>https://github.com/armanckeser/selfhost-apps</code></span></li><li><strong>Unraid</strong><span>Apps → search for the app name (Community Apps lists this repo's templates)</span></li><li><strong>Portainer</strong><span>Settings → App Templates → URL <code>https://armanckeser.github.io/selfhost-apps/portainer/templates.json</code></span></li></ul>
+  <p style="margin-top:24px">Source and issues: <a href="https://github.com/armanckeser/selfhost-apps">github.com/armanckeser/selfhost-apps</a></p>
+</main>
+</body>
+</html>

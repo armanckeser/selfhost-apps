@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>USCIS Tracker</Name>
+  <Repository>ghcr.io/armanckeser/uscis-tracker:aio</Repository>
+  <Registry>https://ghcr.io/armanckeser/uscis-tracker</Registry>
+  <Network>bridge</Network>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/armanckeser/uscis-tracker/issues</Support>
+  <Project>https://github.com/armanckeser/uscis-tracker</Project>
+  <Overview>Know what moved on your green card case, and when your date comes up.
+
+One tap from a signed-in my.uscis.gov tab reads every case in your household. The tracker keeps the full history, shows what changed since you last looked (including the updates USCIS never announces), and estimates when the visa bulletin will reach your priority date.
+
+It sends a push notification when a case changes. The refresh runs from your own phone's USCIS session, so the server never holds your USCIS password; your phone has to reach the server (a home server plus Tailscale works well) over HTTPS.</Overview>
+  <Category>Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/uscis-tracker.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/uscis-tracker.png</Icon>
+  <Changes>0.3.0: - Installs from the app stores of Cosmos, Umbrel, CasaOS/ZimaOS, Runtipi, Unraid and Portainer, through https://github.com/armanckeser/selfhost-apps. Or with one command and no checkout: `docker compose -f oci://ghcr.io/armanckeser/uscis-tracker-stack:latest up -d`.</Changes>
+  <License>AGPL-3.0-or-later</License>
+  <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/uscis-tracker-1.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/uscis-tracker-2.png</Screenshot>
+  <Config Name="Web UI" Target="8080" Default="5181" Mode="tcp" Description="Port for the web app." Type="Port" Display="always" Required="true" Mask="false">5181</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/uscis-tracker" Mode="rw" Description="Everything the app keeps: its database and settings. Back this up." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/uscis-tracker</Config>
+  <Config Name="Password for the app (leave empty for no login)" Target="AUTH_PASSWORD" Default="" Description="Set one if anyone else on your network can reach this server." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="Time zone" Target="TZ" Default="UTC" Description="Time zone, e.g. America/New_York." Type="Variable" Display="advanced" Required="false" Mask="false">UTC</Config>
+</Container>

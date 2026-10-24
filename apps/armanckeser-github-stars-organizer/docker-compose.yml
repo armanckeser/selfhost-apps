@@ -1,0 +1,58 @@
+services:
+  app:
+    image: ghcr.io/armanckeser/github-stars-organizer:1.2.0
+    container_name: armanckeser-github-stars-organizer-app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://postgres:${GITHUB_STARS_ORGANIZER_DB}@armanckeser-github-stars-organizer-postgres:5432/app
+      ELECTRIC_URL: http://armanckeser-github-stars-organizer-electric:3000
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      AUTH_PASSWORD: ${AUTH_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      electric:
+        condition: service_started
+    x-runtipi:
+      is_main: true
+      internal_port: 8080
+  postgres:
+    image: postgres:16-alpine
+    container_name: armanckeser-github-stars-organizer-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${GITHUB_STARS_ORGANIZER_DB}
+    command:
+      - postgres
+      - -c
+      - wal_level=logical
+      - -c
+      - max_replication_slots=10
+      - -c
+      - max_wal_senders=10
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - ${APP_DATA_DIR}/data/pgdata:/var/lib/postgresql/data
+  electric:
+    image: electricsql/electric:1.7.6
+    container_name: armanckeser-github-stars-organizer-electric
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://postgres:${GITHUB_STARS_ORGANIZER_DB}@armanckeser-github-stars-organizer-postgres:5432/app?sslmode=disable
+      ELECTRIC_INSECURE: "true"
+      ELECTRIC_STORAGE_DIR: /var/lib/electric/persistent
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ${APP_DATA_DIR}/data/electricdata:/var/lib/electric/persistent
+x-runtipi:
+  schema_version: 2

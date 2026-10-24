@@ -1,0 +1,39 @@
+{
+  "name": "Kumbara",
+  "id": "armanckeser-kumbara",
+  "available": true,
+  "short_desc": "Budgeting that files your bank feed for you and opens instantly on your phone.",
+  "author": "Armanc Keser",
+  "port": 5182,
+  "categories": [
+    "finance"
+  ],
+  "description": "Budgeting that files your bank feed for you and opens instantly on your phone.",
+  "tipi_version": 22000,
+  "version": "0.22.0",
+  "source": "https://github.com/armanckeser/kumbara",
+  "website": "https://github.com/armanckeser/kumbara",
+  "exposable": true,
+  "dynamic_config": true,
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ],
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "db secret",
+      "min": 32,
+      "env_variable": "KUMBARA_DB"
+    },
+    {
+      "type": "password",
+      "label": "Password for the app (leave empty for no login)",
+      "required": false,
+      "env_variable": "AUTH_PASSWORD",
+      "hint": "Set one if anyone else on your network can reach this server."
+    }
+  ],
+  "created_at": 1792876006000,
+  "updated_at": 1792876006000
+}

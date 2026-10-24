@@ -1,0 +1,33 @@
+services:
+  app:
+    image: ghcr.io/armanckeser/uscis-tracker:0.3.0
+    container_name: armanckeser-uscis-tracker-app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://postgres:${USCIS_TRACKER_DB}@armanckeser-uscis-tracker-postgres:5432/app
+      AUTH_PASSWORD: ${AUTH_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    x-runtipi:
+      is_main: true
+      internal_port: 8080
+  postgres:
+    image: postgres:16-alpine
+    container_name: armanckeser-uscis-tracker-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${USCIS_TRACKER_DB}
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres -d app
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - ${APP_DATA_DIR}/data/pgdata:/var/lib/postgresql/data
+x-runtipi:
+  schema_version: 2

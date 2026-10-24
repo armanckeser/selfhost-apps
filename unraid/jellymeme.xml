@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Jellymeme</Name>
+  <Repository>ghcr.io/armanckeser/jellymeme:latest</Repository>
+  <Registry>https://ghcr.io/armanckeser/jellymeme</Registry>
+  <Network>bridge</Network>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/armanckeser/jellymeme/issues</Support>
+  <Project>https://github.com/armanckeser/jellymeme</Project>
+  <Overview>Describe a scene from your Jellyfin library and get it as a captioned GIF or clip.
+
+Describe a moment the way you'd tell a friend, &quot;when he admits the robot hand freaks him out&quot;, and Jellymeme finds it in your Jellyfin library. Trim it to the line you want, burn in the subtitles or your own caption, and export a GIF, a clip or a still.
+
+Paste a list of scenes, such as the replies to a &quot;best scenes in this show&quot; thread, and every line becomes a clip in one montage.
+
+Jellymeme reads subtitles and video through Jellyfin's HTTP API, so it needs no access to your media files. Connect your Jellyfin server and an API key in Settings after installing. Indexing and rendering use the CPU; a Raspberry Pi works but is slow.</Overview>
+  <Category>MediaApp:Other</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/jellymeme.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/jellymeme.png</Icon>
+  <Changes>1.1.0: - Installs from the app stores of Cosmos, Umbrel, CasaOS/ZimaOS, Runtipi, Unraid and Portainer, through https://github.com/armanckeser/selfhost-apps. Or with one command and no checkout: `docker compose -f oci://ghcr.io/armanckeser/jellymeme-stack:latest up -d`.</Changes>
+  <License>MIT</License>
+  <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/jellymeme-1.png</Screenshot>
+  <Config Name="Web UI" Target="8080" Default="3000" Mode="tcp" Description="Port for the web app." Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/jellymeme" Mode="rw" Description="Everything the app keeps: its database and settings. Back this up." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/jellymeme</Config>
+  <Config Name="Password for the app (leave empty for no login)" Target="AUTH_PASSWORD" Default="" Description="Set one if anyone else on your network can reach this server." Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="Time zone" Target="TZ" Default="UTC" Description="Time zone, e.g. America/New_York." Type="Variable" Display="advanced" Required="false" Mask="false">UTC</Config>
+</Container>

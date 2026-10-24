@@ -1,0 +1,39 @@
+{
+  "name": "USCIS Tracker",
+  "id": "armanckeser-uscis-tracker",
+  "available": true,
+  "short_desc": "Know what moved on your green card case, and when your date comes up.",
+  "author": "Alex Keser",
+  "port": 5181,
+  "categories": [
+    "utilities"
+  ],
+  "description": "Know what moved on your green card case, and when your date comes up.",
+  "tipi_version": 3000,
+  "version": "0.3.0",
+  "source": "https://github.com/armanckeser/uscis-tracker",
+  "website": "https://github.com/armanckeser/uscis-tracker",
+  "exposable": true,
+  "dynamic_config": true,
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ],
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "db secret",
+      "min": 32,
+      "env_variable": "USCIS_TRACKER_DB"
+    },
+    {
+      "type": "password",
+      "label": "Password for the app (leave empty for no login)",
+      "required": false,
+      "env_variable": "AUTH_PASSWORD",
+      "hint": "Set one if anyone else on your network can reach this server."
+    }
+  ],
+  "created_at": 1792876007000,
+  "updated_at": 1792876007000
+}
