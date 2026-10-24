@@ -2,11 +2,11 @@
 // README): what to paste where.
 
 const STORES = (store) => [
-  ["Cosmos", `Market → Sources → add <code>${store.pages}/servapps.json</code>`],
+  ["Cosmos", `Market → Sources → Add Source → <code>${store.pages}/index.json</code>`],
   ["Umbrel", `App Store → ⋯ → Community App Stores → add <code>${store.url}</code>`],
-  ["CasaOS / ZimaOS", `App Store → Add source → <code>${store.url}/archive/refs/heads/casaos.zip</code>`],
-  ["Runtipi", `Settings → App Stores → Add → <code>${store.url}</code>`],
-  ["Unraid", `Apps → search for the app name (Community Apps lists this repo's templates)`],
+  ["CasaOS / ZimaOS", `App Store → Add Source → <code>${store.url}/archive/refs/heads/casaos.zip</code>`],
+  ["Runtipi", `Settings → App Stores → Add App Store → <code>${store.url}</code>`],
+  ["Unraid", `Not in Community Apps yet: copy the app's XML from <code>unraid/</code> in the repo to <code>/boot/config/plugins/dockerMan/templates-user/</code>, then Docker → Add Container`],
   ["Portainer", `Settings → App Templates → URL <code>${store.pages}/portainer/templates.json</code>`],
 ];
 
