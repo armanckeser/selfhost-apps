@@ -3,9 +3,11 @@
 // The same folders are what a PR to azukaar/cosmos-servapps-official needs (description.json, icon.png,
 // screenshots/, cosmos-compose.json).
 //
-// Cosmos puts its own login and HTTPS in front of every app (route mode SERVAPP with AuthEnabled), so the
-// app's own auth stays off.
-import { substitute, firstParagraph } from "../model.mjs";
+// Cosmos puts its own login and HTTPS in front of every app (route mode SERVAPP, AuthEnabled). That login
+// redirects, which breaks an app installed to a phone's home screen (its service worker and background
+// requests get the login page). So an app with its own login (`auth: builtin`) also offers AUTH_PASSWORD:
+// set it, then turn the route's Cosmos login off.
+import { substitute, firstParagraph, AUTH_FIELD } from "../model.mjs";
 
 const serviceName = (model, service) => (service === model.main ? "{ServiceName}" : `{ServiceName}-${service}`);
 
@@ -18,10 +20,14 @@ export function cosmos(model, { pages }) {
       : kind === "input" ? `{Context.${name}}`
       : model.version;
 
+  const fields = model.auth === "builtin" ? [...model.env, AUTH_FIELD] : model.env;
   const services = {};
   for (const [key, service] of Object.entries(model.services)) {
     const name = serviceName(model, key);
     const resolved = substitute(service, resolve);
+    if (key === model.main && model.auth === "builtin") {
+      resolved.environment = { ...(resolved.environment ?? {}), AUTH_PASSWORD: "{Context.AUTH_PASSWORD}" };
+    }
     const environment = Object.entries(resolved.environment ?? {}).map(([variable, value]) => `${variable}=${value}`);
     const entry = {
       image: resolved.image,
@@ -58,6 +64,7 @@ export function cosmos(model, { pages }) {
           useHost: true,
           target: `http://{ServiceName}:${model.port}`,
           mode: "SERVAPP",
+          AuthEnabled: true,
           // Electric's live requests hold for about 20 seconds; leave room for them.
           Timeout: 120000,
           ThrottlePerMinute: 6000,
@@ -71,13 +78,18 @@ export function cosmos(model, { pages }) {
 
   const compose = {
     "cosmos-installer": {
-      form: model.env.map((field) => ({
+      form: fields.map((field) => ({
         name: field.name,
         label: field.label,
         initialValue: field.default ?? "",
         type: field.type === "password" ? "password" : "text",
       })),
-      "post-install": [{ type: "info", label: `${model.name} is installed. It may take a minute to start the first time.` }],
+      "post-install": [
+        { type: "info", label: `${model.name} is installed. It may take a minute to start the first time.` },
+        ...(model.auth === "builtin"
+          ? [{ type: "info", label: `Cosmos asks you to sign in before ${model.name}. If you add ${model.name} to a phone's home screen, set its own password and turn off Cosmos's login on its URL: the redirect breaks home-screen apps.` }]
+          : []),
+      ],
     },
     minVersion: "0.8.0",
     services,

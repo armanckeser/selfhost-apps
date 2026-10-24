@@ -46,6 +46,7 @@ jobs:
           git push
       - name: Push the CasaOS store branch
         run: |
+          mkdir -p casaos/Apps
           rm -rf /tmp/casaos && cp -r casaos /tmp/casaos
           git checkout --orphan casaos-build
           git rm -rf -q .
