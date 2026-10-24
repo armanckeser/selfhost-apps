@@ -9,6 +9,8 @@ store:
   url: https://github.com/armanckeser/selfhost-apps
   # Where the generated site is served (GitHub Pages of this repo).
   pages: https://armanckeser.github.io/selfhost-apps
+  # The maintainer picture stores show next to the catalog (Unraid's ca_profile.xml).
+  icon: https://avatars.githubusercontent.com/u/15313331?v=4
 
 apps:
   - repo: armanckeser/github-stars-organizer

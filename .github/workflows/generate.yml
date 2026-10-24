@@ -35,6 +35,8 @@ jobs:
           node-version: '24'
       - run: npm ci
       - run: npm run generate
+      # The stores' own schemas; a package a store would reject stops here, before it is published.
+      - run: npm run check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit the output

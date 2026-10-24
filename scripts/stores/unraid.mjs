@@ -6,6 +6,13 @@
 // Unraid puts no login in front of apps, so the template offers the app's own AUTH_PASSWORD.
 import { AUTH_FIELD } from "../model.mjs";
 
+// Settings the app can't start without, shown above the install form.
+const requires = (model) => {
+  const needed = model.env.filter((field) => field.required);
+  return needed.length ? `
+  <Requires>${xml(needed.map((field) => `${field.label}.${field.help ? ` ${field.help}` : ""}`).join(" "))}</Requires>` : "";
+};
+
 export function unraid(model, store) {
   const single = Object.values(model.services);
   const own = model.aioImage === null && single.length === 1 ? single[0] : null;
@@ -40,7 +47,7 @@ export function unraid(model, store) {
   <TemplateURL>${raw}/unraid/${model.id}.xml</TemplateURL>
   <Icon>${raw}/unraid/icons/${model.id}.png</Icon>
   <Changes>${xml(`${model.version}${model.releaseNotes ? `: ${model.releaseNotes.split("\n")[0]}` : ""}`)}</Changes>
-  <License>${xml(model.license)}</License>
+  <License>${xml(model.license)}</License>${requires(model)}
 ${model.assets.screenshots.map((_, index) => `  <Screenshot>${raw}/unraid/screenshots/${model.id}-${index + 1}.png</Screenshot>`).join("\n")}
 ${config.join("\n")}
 </Container>
@@ -57,7 +64,7 @@ ${config.join("\n")}
 export const caProfile = (store) => `<?xml version="1.0"?>
 <CommunityApplications>
   <Profile>${xml(store.description)} Every app here is an all-in-one container: map one appdata folder and open the web UI. Support for each app is on its GitHub issues page.</Profile>
-  <Icon>https://raw.githubusercontent.com/${store.repo}/main/icon.png</Icon>
+  <Icon>${xml(store.icon)}</Icon>
   <WebPage>${store.url}</WebPage>
 </CommunityApplications>
 `;

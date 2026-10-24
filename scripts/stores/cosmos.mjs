@@ -93,12 +93,17 @@ export function cosmos(model, { pages }) {
 
   const compose = {
     "cosmos-installer": {
-      form: fields.map((field) => ({
-        name: field.name,
-        label: field.label,
-        initialValue: field.default ?? "",
-        type: field.type === "password" ? "password" : "text",
-      })),
+      // A field's help goes in an `info` row above it, the one place Cosmos's form shows extra text
+      // (client/src/pages/servapps/containers/docker-compose.jsx).
+      form: fields.flatMap((field) => [
+        ...(field.help ? [{ name: `${field.name}_help`, label: field.help, type: "info" }] : []),
+        {
+          name: field.name,
+          label: field.label,
+          initialValue: field.default ?? "",
+          type: field.type === "password" ? "password" : "text",
+        },
+      ]),
       "post-install": [
         { type: "info", label: `${model.name} is installed. It may take a minute to start the first time.` },
         ...(model.auth === "builtin"

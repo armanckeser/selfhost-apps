@@ -13,7 +13,9 @@ export function umbrel(model, store) {
   const secretVar = (name) => `APP_${appId.replace(/-/g, "_").toUpperCase()}_${name.replace(/-/g, "_").toUpperCase()}`;
   const resolve = (kind, name) =>
     kind === "secret" ? `\${${secretVar(name)}}`
-      : kind === "host" ? name
+      // Container names, as the official apps write them (linkwarden_postgres_1): a bare service name
+      // like "postgres" can resolve to another app's container on a network Umbrel shares.
+      : kind === "host" ? `${appId}_${name}_1`
       : kind === "input" ? ""
       : model.version;
 
@@ -31,7 +33,13 @@ export function umbrel(model, store) {
     if (resolved.environment) entry.environment = resolved.environment;
     if (resolved.command) entry.command = resolved.command;
     if (resolved.healthcheck) entry.healthcheck = resolved.healthcheck;
-    if (resolved.depends_on) entry.depends_on = resolved.depends_on;
+    // Wait for a dependency's healthcheck where it has one, like the official apps do.
+    if (resolved.depends_on) {
+      entry.depends_on = Object.fromEntries(resolved.depends_on.map((other) => [
+        other,
+        { condition: model.services[other]?.healthcheck ? "service_healthy" : "service_started" },
+      ]));
+    }
     if (resolved.volumes) {
       entry.volumes = Object.entries(resolved.volumes).map(([volume, target]) => `\${APP_DATA_DIR}/data/${volume}:${target}`);
     }
@@ -62,9 +70,10 @@ export function umbrel(model, store) {
     defaultPassword: "",
   };
 
-  // derive_entropy gives each secret a stable value per install, from the Umbrel's own seed.
+  // derive_entropy gives each secret a stable value per install, from the Umbrel's own seed; keyed by
+  // ${app_entropy_identifier} as the official apps do (murmur, tandoor).
   const exports = model.secrets
-    .map((name) => `export ${secretVar(name)}=$(derive_entropy "${appId}-${name}")`)
+    .map((name) => `export ${secretVar(name)}="$(derive_entropy "\${app_entropy_identifier}-${name}")"`)
     .join("\n");
 
   return {
@@ -81,4 +90,4 @@ export function umbrel(model, store) {
 export const umbrelStoreFile = (store) => stringify({ id: store.id, name: store.name });
 
 const umbrelCategory = (category) =>
-  ({ productivity: "files", finance: "finance", media: "media", development: "developer", home: "automation", social: "social", ai: "ai", utilities: "files" })[category] ?? "files";
+  ({ productivity: "files", finance: "finance", media: "media", development: "developer", developer: "developer", home: "automation", social: "social", ai: "ai", utilities: "files" })[category] ?? "files";

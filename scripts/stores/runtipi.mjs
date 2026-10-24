@@ -51,7 +51,8 @@ export function runtipi(model, store) {
     dynamic_config: true,
     supported_architectures: model.architectures,
     form_fields: [
-      ...model.secrets.map((name) => ({ type: "random", label: `${name} secret`, min: 32, env_variable: secretVar(name) })),
+      // Hex, so a generated password can sit in a postgresql:// URL without escaping.
+      ...model.secrets.map((name) => ({ type: "random", label: `${name} secret`, min: 32, encoding: "hex", required: true, env_variable: secretVar(name) })),
       ...inputs.map((field) => ({
         type: field.type === "password" ? "password" : field.type === "url" ? "url" : field.type === "email" ? "email" : "text",
         label: field.label,
@@ -75,4 +76,4 @@ export function runtipi(model, store) {
 }
 
 const runtipiCategory = (category) =>
-  ({ productivity: "utilities", finance: "finance", media: "media", development: "development", home: "automation", social: "social", ai: "ai", utilities: "utilities" })[category] ?? "utilities";
+  ({ productivity: "utilities", finance: "finance", media: "media", development: "development", developer: "development", home: "automation", social: "social", ai: "ai", utilities: "utilities" })[category] ?? "utilities";

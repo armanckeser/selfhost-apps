@@ -1,7 +1,7 @@
 // Portainer (and Dockge-style tools that read the same list): App Templates v3, one JSON file. People set
 // https://<pages>/portainer/templates.json under Settings → App Templates. Each entry is a git stack that
-// deploys the app's own docker-compose.selfhost.yml at its release tag, so Portainer runs exactly what a
-// `docker compose up` would.
+// deploys the app's own docker-compose.selfhost.yml from its default branch (a template can't name a
+// ref), with TAG pinning the image to the release, so Portainer runs what a `docker compose up` would.
 import { AUTH_FIELD } from "../model.mjs";
 
 export function portainer(model, store) {
@@ -21,7 +21,12 @@ export function portainer(model, store) {
       env: [
         { name: "TAG", label: "Version", default: model.version },
         { name: "PORT", label: "Web port on this server", default: String(model.hostPort) },
-        ...fields.map((field) => ({ name: field.name, label: field.label, default: field.default ?? "" })),
+        ...fields.map((field) => ({
+          name: field.name,
+          label: field.label,
+          ...(field.help ? { description: field.help } : {}),
+          default: field.default ?? "",
+        })),
       ],
     },
     files: { [`site/portainer/${model.id}.png`]: { copy: model.assets.icon } },
@@ -29,5 +34,6 @@ export function portainer(model, store) {
 }
 
 export const portainerIndex = (templates) => ({
-  "site/portainer/templates.json": `${JSON.stringify({ version: "3", templates }, null, 2)}\n`,
+  // Every official v3 template carries a numeric id (portainer/templates).
+  "site/portainer/templates.json": `${JSON.stringify({ version: "3", templates: templates.map((template, index) => ({ id: index + 1, ...template })) }, null, 2)}\n`,
 });

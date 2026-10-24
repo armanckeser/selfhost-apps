@@ -34,7 +34,13 @@ export function casaos(model, store) {
     };
     if (resolved.command) entry.command = resolved.command;
     if (resolved.healthcheck) entry.healthcheck = resolved.healthcheck;
-    if (resolved.depends_on) entry.depends_on = resolved.depends_on;
+    // Wait for a dependency's healthcheck where it has one, as the official apps do (Linkwarden).
+    if (resolved.depends_on) {
+      entry.depends_on = Object.fromEntries(resolved.depends_on.map((other) => [
+        other,
+        { condition: model.services[other]?.healthcheck ? "service_healthy" : "service_started" },
+      ]));
+    }
     if (resolved.volumes) {
       entry.volumes = Object.entries(resolved.volumes).map(([volume, target]) => ({
         type: "bind",
@@ -45,7 +51,8 @@ export function casaos(model, store) {
     if (key === model.main) {
       entry.ports = [{ target: model.port, published: String(model.hostPort), protocol: "tcp" }];
       entry["x-casaos"] = {
-        envs: fields.map((field) => ({ container: field.name, description: { en_US: field.label } })),
+        // The install form shows the description, so it carries the help text (e.g. where to make a token).
+        envs: fields.map((field) => ({ container: field.name, description: { en_US: field.help ? `${field.label}. ${field.help}` : field.label } })),
         ports: [{ container: String(model.port), description: { en_US: "Web UI" } }],
       };
     }
@@ -76,6 +83,8 @@ export function casaos(model, store) {
       port_map: String(model.hostPort),
       scheme: "http",
       version: model.version,
+      ...(model.releasedAt ? { update_at: model.releasedAt.slice(0, 10) } : {}),
+      ...(model.releaseNotes ? { release_notes: { en_US: model.releaseNotes } } : {}),
       website: model.website,
       repo: model.repo,
       support: model.support,
