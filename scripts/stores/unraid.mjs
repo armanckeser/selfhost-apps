@@ -1,18 +1,22 @@
 // Unraid Community Apps: one XML template per container, in a public repo with ca_profile.xml at its root,
 // registered once at https://ca.unraid.net/submit. Community Apps installs one container per template, so
-// these use the app's all-in-one image (Postgres, Electric and the app together, everything under /data).
+// these use the app's all-in-one image (Postgres, Electric and the app together, everything under /data),
+// or, for an app that is one container already (`aio: false`), its own image.
 //
 // Unraid puts no login in front of apps, so the template offers the app's own AUTH_PASSWORD.
 import { AUTH_FIELD } from "../model.mjs";
 
 export function unraid(model, store) {
-  if (model.aioImage === null) return { files: {} };
-  const image = model.aioImage.replace("${version}-aio", "aio");
+  const single = Object.values(model.services);
+  const own = model.aioImage === null && single.length === 1 ? single[0] : null;
+  if (model.aioImage === null && !own) return { files: {} };
+  const image = own ? `${model.image}:latest` : model.aioImage.replace("${version}-aio", "aio");
+  const dataTarget = own ? (Object.values(own.volumes ?? {})[0] ?? "/data") : "/data";
   const fields = model.auth === "builtin" ? [...model.env, AUTH_FIELD] : model.env;
   const raw = `https://raw.githubusercontent.com/${store.repo}/main`;
   const config = [
     `  <Config Name="Web UI" Target="${model.port}" Default="${model.hostPort}" Mode="tcp" Description="Port for the web app." Type="Port" Display="always" Required="true" Mask="false">${model.hostPort}</Config>`,
-    `  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/${model.id}" Mode="rw" Description="Everything the app keeps: its database and settings. Back this up." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/${model.id}</Config>`,
+    `  <Config Name="Data" Target="${dataTarget}" Default="/mnt/user/appdata/${model.id}" Mode="rw" Description="Everything the app keeps: its database and settings. Back this up." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/${model.id}</Config>`,
     ...fields.map(
       (field) =>
         `  <Config Name="${xml(field.label)}" Target="${field.name}" Default="${xml(field.default ?? "")}" Description="${xml(field.help ?? field.label)}" Type="Variable" Display="always" Required="${field.required ? "true" : "false"}" Mask="${field.type === "password" ? "true" : "false"}">${xml(field.default ?? "")}</Config>`,
