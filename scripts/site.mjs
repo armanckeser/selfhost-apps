@@ -2,7 +2,7 @@
 // README): what to paste where.
 
 const STORES = (store) => [
-  ["Cosmos", `Market → Sources → Add Source → <code>${store.pages}/index.json</code>`],
+  ["Cosmos", `Market → Sources → Add Source → <code>${store.pages}/servapps.json</code>`],
   ["Umbrel", `App Store → ⋯ → Community App Stores → add <code>${store.url}</code>`],
   ["CasaOS / ZimaOS", `App Store → Add Source → <code>${store.url}/archive/refs/heads/casaos.zip</code>`],
   ["Runtipi", `Settings → App Stores → Add App Store → <code>${store.url}</code>`],

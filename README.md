@@ -10,7 +10,7 @@ version is released.
 
 | Server | Where | Paste |
 | --- | --- | --- |
-| Cosmos | Market → Sources → Add Source (any name) → Save | `https://armanckeser.github.io/selfhost-apps/index.json` |
+| Cosmos | Market → Sources → Add Source (any name) → Save | `https://armanckeser.github.io/selfhost-apps/servapps.json` |
 | Umbrel | App Store → ⋯ → Community App Stores → Add | `https://github.com/armanckeser/selfhost-apps` |
 | CasaOS / ZimaOS (0.4.4+) | App Store → Add Source | `https://github.com/armanckeser/selfhost-apps/archive/refs/heads/casaos.zip` |
 | Runtipi (4.0+) | Settings → App Stores → Add App Store | `https://github.com/armanckeser/selfhost-apps` |
@@ -41,7 +41,7 @@ store's format:
 | `apps/armanckeser-<app>/` | Runtipi app store |
 | `unraid/` and `ca_profile.xml` | Unraid Community Apps (all-in-one `:aio` images) |
 | `casaos/Apps/` → `casaos` branch | CasaOS / ZimaOS store |
-| `site/index.json`, `site/servapps/` | Cosmos market source (`servapps.json` is the same list without the wrapper) |
+| `site/servapps.json` (and `index.json`, the same), `site/servapps/` | Cosmos market source |
 | `site/portainer/templates.json` | Portainer App Templates |
 
 Everything outside `catalog.yaml`, `scripts/` and this README is generated. CI regenerates it daily and

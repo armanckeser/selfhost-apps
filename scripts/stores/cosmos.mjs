@@ -1,6 +1,6 @@
 // Cosmos Cloud: a market source is { source, showcase, all } (index.json; Cosmos's src/market/update.go
 // decodes exactly that), and each app points at its own cosmos-compose.json. People add
-// https://<pages>/index.json under Market → Sources → Add Source. servapps.json is the bare list.
+// https://<pages>/servapps.json (or index.json, the same) under Market → Sources → Add Source.
 // The same folders are what a PR to azukaar/cosmos-servapps-official needs (description.json, icon.png,
 // screenshots/, cosmos-compose.json).
 //
@@ -134,7 +134,8 @@ export function cosmos(model, { pages }) {
 export function cosmosIndex(listings, store) {
   const servapps = listings.map((listing) => listing);
   return {
-    "site/servapps.json": json(servapps),
+    // Both names hold the same source: servapps.json is the URL already given out.
+    "site/servapps.json": json({ source: `${store.pages}/servapps.json`, showcase: [], all: servapps }),
     "site/index.json": json({ source: `${store.pages}/index.json`, showcase: [], all: servapps }),
   };
 }
