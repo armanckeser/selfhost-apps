@@ -99,7 +99,10 @@ x-casaos:
       Needs a classic GitHub token with the repo scope, which you paste into the install form. Create one at https://github.com/settings/tokens/new?scopes=repo Tags, ratings and notes stay in this server's database; Lists and unstars are written to GitHub. Not affiliated with GitHub.
   tips:
     before_install:
-      en_US: Set AUTH_PASSWORD if anyone else on your network can reach this server; leave it empty for no login.
+      en_US: |-
+        Use Custom Installation and set GITHUB_TOKEN: GitHub token (classic, repo scope). Create one at https://github.com/settings/tokens/new?scopes=repo
+
+        Set AUTH_PASSWORD if anyone else on your network can reach this server; leave it empty for no login.
   index: /
   port_map: "5184"
   scheme: http
