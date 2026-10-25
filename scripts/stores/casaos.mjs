@@ -64,7 +64,8 @@ export function casaos(model, store) {
     name: appId,
     services,
     "x-casaos": {
-      id: appId,
+      // ZimaOS's store protocol (v2) wants a reverse-domain id; the validator rejects anything else.
+      id: `com.${store.id}.${model.id}`,
       architectures: model.architectures,
       main: model.main,
       author: store.maintainer,
