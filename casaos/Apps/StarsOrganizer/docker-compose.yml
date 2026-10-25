@@ -73,7 +73,7 @@ services:
         source: /DATA/AppData/$AppID/electricdata
         target: /var/lib/electric/persistent
 x-casaos:
-  id: armanckeser-github-stars-organizer
+  id: com.armanckeser.github-stars-organizer
   architectures:
     - amd64
     - arm64

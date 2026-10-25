@@ -43,7 +43,7 @@ services:
         source: /DATA/AppData/$AppID/pgdata
         target: /var/lib/postgresql/data
 x-casaos:
-  id: armanckeser-uscis-tracker
+  id: com.armanckeser.uscis-tracker
   architectures:
     - amd64
     - arm64

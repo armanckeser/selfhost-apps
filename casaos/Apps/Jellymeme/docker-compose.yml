@@ -24,7 +24,7 @@ services:
           description:
             en_US: Web UI
 x-casaos:
-  id: armanckeser-jellymeme
+  id: com.armanckeser.jellymeme
   architectures:
     - amd64
     - arm64
