@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <CommunityApplications>
-  <Profile>Self-hosted apps by Armanc Keser. Each one runs on a Raspberry Pi and installs in one click. Every app here is an all-in-one container: map one appdata folder and open the web UI. Support for each app is on its GitHub issues page.</Profile>
+  <Profile>Self-hosted apps by Armanc Keser. Each one installs in one click. Every app here is an all-in-one container: map one appdata folder and open the web UI. Support for each app is on its GitHub issues page.</Profile>
   <Icon>https://avatars.githubusercontent.com/u/15313331?v=4</Icon>
   <WebPage>https://github.com/armanckeser/selfhost-apps</WebPage>
 </CommunityApplications>

@@ -2,10 +2,10 @@
 // (with x-casaos metadata) plus an icon. CI pushes these folders to this repo's `casaos` branch, and people
 // add https://github.com/<owner>/selfhost-apps/archive/refs/heads/casaos.zip under App Store → Add source.
 //
-// CasaOS has no secret generator and no login in front of apps. Database passwords are therefore fixed
-// per app (the databases are never published outside the app's own network), and the install offers the
-// app's own AUTH_PASSWORD when the app has one.
-import { createHash } from "node:crypto";
+// CasaOS has no secret generator and no login in front of apps. Rather than ship a fixed password, Postgres
+// runs with trust auth: it is reachable only on the app's own network and publishes no port. Any other kind
+// of secret has nowhere safe to come from, so it fails the build. The install offers the app's own
+// AUTH_PASSWORD when the app has one.
 import { stringify } from "yaml";
 import { AUTH_FIELD, substitute } from "../model.mjs";
 
@@ -22,10 +22,15 @@ function installTip(requiredFields, builtinAuth) {
 }
 
 export function casaos(model, store) {
-  const appId = `${store.id}-${model.id}`;
-  const fixedSecret = (name) => createHash("sha256").update(`${appId}:${name}`).digest("hex").slice(0, 32);
+  // Plain names, as the official apps use (actualbudget, not <store>-actualbudget).
+  const appId = model.id;
+  for (const secret of model.secrets) {
+    const isDbPassword = Object.values(model.services).some((service) =>
+      service.image.startsWith("postgres:") && service.environment?.POSTGRES_PASSWORD === `\${secret:${secret}}`);
+    if (!isDbPassword) throw new Error(`CasaOS: ${model.id} secret ${secret} is not a Postgres password, and CasaOS cannot generate one`);
+  }
   const resolve = (kind, name) =>
-    kind === "secret" ? fixedSecret(name)
+    kind === "secret" ? ""
       : kind === "host" ? `${appId}-${name}`
       : kind === "input" ? ""
       : model.version;
@@ -35,6 +40,10 @@ export function casaos(model, store) {
   for (const [key, service] of Object.entries(model.services)) {
     const resolved = substitute(service, resolve);
     const environment = { ...(resolved.environment ?? {}) };
+    if (resolved.image.startsWith("postgres:") && environment.POSTGRES_PASSWORD === "") {
+      delete environment.POSTGRES_PASSWORD;
+      environment.POSTGRES_HOST_AUTH_METHOD = "trust";
+    }
     if (key === model.main) for (const field of fields) environment[field.name] = field.default ?? "";
     const entry = {
       image: resolved.image,

@@ -2,9 +2,9 @@
 # (the agent-first-apps template ships one). `npm run generate` reads every manifest at its release tag
 # and writes the store packages; CI runs it daily and whenever an app publishes a release.
 store:
-  id: armanckeser
+  id: selfhost
   name: Armanc's apps
-  description: Self-hosted apps by Armanc Keser. Each one runs on a Raspberry Pi and installs in one click.
+  description: Self-hosted apps by Armanc Keser. Each one installs in one click.
   maintainer: Armanc Keser
   url: https://github.com/armanckeser/selfhost-apps
   # Where the generated site is served (GitHub Pages of this repo).

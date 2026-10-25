@@ -1,11 +1,11 @@
 services:
   app:
     image: ghcr.io/armanckeser/kumbara:0.22.0
-    container_name: armanckeser-kumbara-app
+    container_name: selfhost-kumbara-app
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://postgres:${KUMBARA_DB}@armanckeser-kumbara-postgres:5432/app
-      ELECTRIC_URL: http://armanckeser-kumbara-electric:3000
+      DATABASE_URL: postgresql://postgres:${KUMBARA_DB}@selfhost-kumbara-postgres:5432/app
+      ELECTRIC_URL: http://selfhost-kumbara-electric:3000
       AUTH_PASSWORD: ${AUTH_PASSWORD}
     depends_on:
       postgres:
@@ -17,7 +17,7 @@ services:
       internal_port: 8080
   postgres:
     image: postgres:16-alpine
-    container_name: armanckeser-kumbara-postgres
+    container_name: selfhost-kumbara-postgres
     restart: unless-stopped
     environment:
       POSTGRES_DB: app
@@ -42,10 +42,10 @@ services:
       - ${APP_DATA_DIR}/data/pgdata:/var/lib/postgresql/data
   electric:
     image: electricsql/electric:1.7.6
-    container_name: armanckeser-kumbara-electric
+    container_name: selfhost-kumbara-electric
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://postgres:${KUMBARA_DB}@armanckeser-kumbara-postgres:5432/app?sslmode=disable
+      DATABASE_URL: postgresql://postgres:${KUMBARA_DB}@selfhost-kumbara-postgres:5432/app?sslmode=disable
       ELECTRIC_INSECURE: "true"
       ELECTRIC_STORAGE_DIR: /var/lib/electric/persistent
     depends_on:

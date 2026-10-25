@@ -1,5 +1,5 @@
 manifestVersion: 1
-id: armanckeser-uscis-tracker
+id: selfhost-uscis-tracker
 category: files
 name: USCIS Tracker
 version: 0.3.0

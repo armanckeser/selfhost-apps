@@ -1,29 +1,29 @@
+version: "3.7"
 services:
-  app:
-    image: ghcr.io/armanckeser/github-stars-organizer:1.2.1
-    container_name: armanckeser-github-stars-organizer-app
-    restart: unless-stopped
+  app_proxy:
     environment:
-      DATABASE_URL: postgresql://postgres:${GITHUB_STARS_ORGANIZER_DB}@armanckeser-github-stars-organizer-postgres:5432/app
-      ELECTRIC_URL: http://armanckeser-github-stars-organizer-electric:3000
-      GITHUB_TOKEN: ${GITHUB_TOKEN}
-      AUTH_PASSWORD: ${AUTH_PASSWORD}
+      APP_HOST: selfhost-kumbara_app_1
+      APP_PORT: 8080
+  app:
+    image: ghcr.io/armanckeser/kumbara:0.22.0
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      DATABASE_URL: postgresql://postgres:${APP_SELFHOST_KUMBARA_DB}@selfhost-kumbara_postgres_1:5432/app
+      ELECTRIC_URL: http://selfhost-kumbara_electric_1:3000
     depends_on:
       postgres:
         condition: service_healthy
       electric:
         condition: service_started
-    x-runtipi:
-      is_main: true
-      internal_port: 8080
   postgres:
     image: postgres:16-alpine
-    container_name: armanckeser-github-stars-organizer-postgres
-    restart: unless-stopped
+    restart: on-failure
+    stop_grace_period: 1m
     environment:
       POSTGRES_DB: app
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${GITHUB_STARS_ORGANIZER_DB}
+      POSTGRES_PASSWORD: ${APP_SELFHOST_KUMBARA_DB}
     command:
       - postgres
       - -c
@@ -43,10 +43,10 @@ services:
       - ${APP_DATA_DIR}/data/pgdata:/var/lib/postgresql/data
   electric:
     image: electricsql/electric:1.7.6
-    container_name: armanckeser-github-stars-organizer-electric
-    restart: unless-stopped
+    restart: on-failure
+    stop_grace_period: 1m
     environment:
-      DATABASE_URL: postgresql://postgres:${GITHUB_STARS_ORGANIZER_DB}@armanckeser-github-stars-organizer-postgres:5432/app?sslmode=disable
+      DATABASE_URL: postgresql://postgres:${APP_SELFHOST_KUMBARA_DB}@selfhost-kumbara_postgres_1:5432/app?sslmode=disable
       ELECTRIC_INSECURE: "true"
       ELECTRIC_STORAGE_DIR: /var/lib/electric/persistent
     depends_on:
@@ -54,5 +54,3 @@ services:
         condition: service_healthy
     volumes:
       - ${APP_DATA_DIR}/data/electricdata:/var/lib/electric/persistent
-x-runtipi:
-  schema_version: 2

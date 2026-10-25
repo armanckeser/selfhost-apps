@@ -1,26 +1,25 @@
-version: "3.7"
 services:
-  app_proxy:
-    environment:
-      APP_HOST: armanckeser-uscis-tracker_app_1
-      APP_PORT: 8080
   app:
     image: ghcr.io/armanckeser/uscis-tracker:0.3.0
-    restart: on-failure
-    stop_grace_period: 1m
+    container_name: selfhost-uscis-tracker-app
+    restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://postgres:${APP_ARMANCKESER_USCIS_TRACKER_DB}@armanckeser-uscis-tracker_postgres_1:5432/app
+      DATABASE_URL: postgresql://postgres:${USCIS_TRACKER_DB}@selfhost-uscis-tracker-postgres:5432/app
+      AUTH_PASSWORD: ${AUTH_PASSWORD}
     depends_on:
       postgres:
         condition: service_healthy
+    x-runtipi:
+      is_main: true
+      internal_port: 8080
   postgres:
     image: postgres:16-alpine
-    restart: on-failure
-    stop_grace_period: 1m
+    container_name: selfhost-uscis-tracker-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_DB: app
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${APP_ARMANCKESER_USCIS_TRACKER_DB}
+      POSTGRES_PASSWORD: ${USCIS_TRACKER_DB}
     healthcheck:
       test:
         - CMD-SHELL
@@ -30,3 +29,5 @@ services:
       retries: 20
     volumes:
       - ${APP_DATA_DIR}/data/pgdata:/var/lib/postgresql/data
+x-runtipi:
+  schema_version: 2

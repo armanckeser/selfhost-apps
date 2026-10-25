@@ -1,10 +1,10 @@
 services:
   app:
     image: ghcr.io/armanckeser/wishlist:0.33.0
-    container_name: armanckeser-wishlist-app
+    container_name: selfhost-wishlist-app
     restart: unless-stopped
     environment:
-      POSTGRES_SERVER: armanckeser-wishlist-postgres
+      POSTGRES_SERVER: selfhost-wishlist-postgres
       POSTGRES_DB: wishlist
       POSTGRES_USER: wishlist
       POSTGRES_PASSWORD: ${WISHLIST_DB}
@@ -16,7 +16,7 @@ services:
       internal_port: 8080
   postgres:
     image: postgres:17
-    container_name: armanckeser-wishlist-postgres
+    container_name: selfhost-wishlist-postgres
     restart: unless-stopped
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
