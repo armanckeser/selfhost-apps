@@ -10,26 +10,28 @@ import { substitute } from "../model.mjs";
 
 export function umbrel(model, store) {
   const appId = `${store.id}-${model.id}`;
+  const containerName = (service) => `${model.id}_${service}_1`;
   const secretVar = (name) => `APP_${appId.replace(/-/g, "_").toUpperCase()}_${name.replace(/-/g, "_").toUpperCase()}`;
   const resolve = (kind, name) =>
     kind === "secret" ? `\${${secretVar(name)}}`
-      // Container names, as the official apps write them (linkwarden_postgres_1): a bare service name
-      // like "postgres" can resolve to another app's container on a network Umbrel shares.
-      : kind === "host" ? `${appId}_${name}_1`
+      // Container names in the official apps' shape (linkwarden_postgres_1): a bare service name like
+      // "postgres" can resolve to another app's container on a network Umbrel shares. They are set
+      // explicitly so they carry the app's name, not the store-prefixed id.
+      : kind === "host" ? containerName(name)
       : kind === "input" ? ""
       : model.version;
 
   const services = {
     app_proxy: {
       environment: {
-        APP_HOST: `${appId}_${model.main}_1`,
+        APP_HOST: containerName(model.main),
         APP_PORT: model.port,
       },
     },
   };
   for (const [key, service] of Object.entries(model.services)) {
     const resolved = substitute(service, resolve);
-    const entry = { image: resolved.image, restart: "on-failure", stop_grace_period: "1m" };
+    const entry = { image: resolved.image, container_name: containerName(key), restart: "on-failure", stop_grace_period: "1m" };
     if (resolved.environment) entry.environment = resolved.environment;
     if (resolved.command) entry.command = resolved.command;
     if (resolved.healthcheck) entry.healthcheck = resolved.healthcheck;
@@ -57,7 +59,7 @@ export function umbrel(model, store) {
     description: model.description,
     developer: model.developer,
     website: model.website,
-    submitter: store.maintainer,
+    submitter: model.maintainer ?? store.maintainer,
     submission: store.url,
     repo: model.repo,
     support: model.support,

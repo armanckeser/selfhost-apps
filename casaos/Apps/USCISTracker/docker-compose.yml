@@ -43,13 +43,13 @@ services:
         source: /DATA/AppData/$AppID/pgdata
         target: /var/lib/postgresql/data
 x-casaos:
-  id: com.selfhost.uscis-tracker
+  id: com.armanckeser.uscis-tracker
   architectures:
     - amd64
     - arm64
   main: app
-  author: Armanc Keser
-  developer: Alex Keser
+  author: armanckeser
+  developer: armanckeser
   category: Utilities
   icon: https://cdn.jsdelivr.net/gh/armanckeser/selfhost-apps@casaos/Apps/USCISTracker/icon.png
   thumbnail: https://cdn.jsdelivr.net/gh/armanckeser/selfhost-apps@casaos/Apps/USCISTracker/screenshot-1.png

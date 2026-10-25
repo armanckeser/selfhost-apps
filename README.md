@@ -37,8 +37,8 @@ store's format:
 
 | Output | Store |
 | --- | --- |
-| `selfhost-<app>/` and `umbrel-app-store.yml` | Umbrel community store (read from the default branch) |
-| `apps/selfhost-<app>/` | Runtipi app store |
+| `armanckeser-<app>/` and `umbrel-app-store.yml` | Umbrel community store (read from the default branch) |
+| `apps/armanckeser-<app>/` | Runtipi app store |
 | `unraid/` and `ca_profile.xml` | Unraid Community Apps (all-in-one `:aio` images) |
 | `casaos/Apps/` → `casaos` branch | CasaOS / ZimaOS store |
 | `site/servapps.json` (and `index.json`, the same), `site/servapps/` | Cosmos market source |

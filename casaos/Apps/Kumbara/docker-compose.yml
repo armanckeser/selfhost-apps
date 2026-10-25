@@ -69,7 +69,7 @@ services:
         source: /DATA/AppData/$AppID/electricdata
         target: /var/lib/electric/persistent
 x-casaos:
-  id: com.selfhost.kumbara
+  id: com.armanckeser.kumbara
   architectures:
     - amd64
     - arm64

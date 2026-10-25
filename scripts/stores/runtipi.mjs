@@ -12,7 +12,7 @@ export function runtipi(model, store) {
   const secretVar = (name) => `${model.id}_${name}`.replace(/-/g, "_").toUpperCase();
   const resolve = (kind, name) =>
     kind === "secret" ? `\${${secretVar(name)}}`
-      : kind === "host" ? `${id}-${name}`
+      : kind === "host" ? `${model.id}-${name}`
       : kind === "input" ? `\${${name}}`
       : model.version;
   const inputs = model.auth === "builtin" ? [...model.env, AUTH_FIELD] : model.env;
@@ -22,7 +22,7 @@ export function runtipi(model, store) {
     const resolved = substitute(service, resolve);
     const environment = { ...(resolved.environment ?? {}) };
     if (key === model.main && model.auth === "builtin") environment.AUTH_PASSWORD = "${AUTH_PASSWORD}";
-    const entry = { image: resolved.image, container_name: `${id}-${key}`, restart: "unless-stopped", environment };
+    const entry = { image: resolved.image, container_name: `${model.id}-${key}`, restart: "unless-stopped", environment };
     if (resolved.command) entry.command = resolved.command;
     if (resolved.healthcheck) entry.healthcheck = resolved.healthcheck;
     if (resolved.depends_on) entry.depends_on = Object.fromEntries(resolved.depends_on.map((other) => [other, { condition: model.services[other].healthcheck ? "service_healthy" : "service_started" }]));

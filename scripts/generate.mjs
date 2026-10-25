@@ -127,6 +127,9 @@ for (const entry of catalog.apps) {
     console.warn(`skip ${entry.repo}: ${error.message}`);
     continue;
   }
+  // `credit` replaces the developer name and the packager name for one app (USCIS Tracker lists the
+  // GitHub handle rather than a full name).
+  if (entry.credit) Object.assign(model, { developer: entry.credit, maintainer: entry.credit });
   models.push(model);
   const add = (files) => Object.entries(files ?? {}).forEach(([path, content]) => outputs.set(path, content));
   if (model.stores.cosmos) {

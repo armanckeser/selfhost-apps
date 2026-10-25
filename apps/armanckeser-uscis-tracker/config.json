@@ -1,9 +1,9 @@
 {
   "name": "USCIS Tracker",
-  "id": "selfhost-uscis-tracker",
+  "id": "armanckeser-uscis-tracker",
   "available": true,
   "short_desc": "Know what moved on your green card case, and when your date comes up.",
-  "author": "Alex Keser",
+  "author": "armanckeser",
   "port": 5181,
   "categories": [
     "utilities"

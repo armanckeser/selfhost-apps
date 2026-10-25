@@ -43,7 +43,7 @@ services:
         source: /DATA/AppData/$AppID/pgdata
         target: /var/lib/postgresql/data/pgdata
 x-casaos:
-  id: com.selfhost.wishlist
+  id: com.armanckeser.wishlist
   architectures:
     - amd64
     - arm64

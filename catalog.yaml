@@ -2,7 +2,7 @@
 # (the agent-first-apps template ships one). `npm run generate` reads every manifest at its release tag
 # and writes the store packages; CI runs it daily and whenever an app publishes a release.
 store:
-  id: selfhost
+  id: armanckeser
   name: Armanc's apps
   description: Self-hosted apps by Armanc Keser. Each one installs in one click.
   maintainer: Armanc Keser
@@ -18,3 +18,4 @@ apps:
   - repo: armanckeser/wishlist
   - repo: armanckeser/jellymeme
   - repo: armanckeser/uscis-tracker
+    credit: armanckeser

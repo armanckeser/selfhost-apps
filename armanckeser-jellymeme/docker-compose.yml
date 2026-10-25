@@ -2,10 +2,11 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: selfhost-jellymeme_app_1
+      APP_HOST: jellymeme_app_1
       APP_PORT: 8080
   app:
     image: ghcr.io/armanckeser/jellymeme:1.1.0
+    container_name: jellymeme_app_1
     restart: on-failure
     stop_grace_period: 1m
     environment: {}

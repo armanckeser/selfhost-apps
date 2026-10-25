@@ -22,7 +22,7 @@ function installTip(requiredFields, builtinAuth) {
 }
 
 export function casaos(model, store) {
-  // Plain names, as the official apps use (actualbudget, not <store>-actualbudget).
+  // Plain container names, as the official apps use (actualbudget, not <store>-actualbudget).
   const appId = model.id;
   for (const secret of model.secrets) {
     const isDbPassword = Object.values(model.services).some((service) =>
@@ -87,7 +87,7 @@ export function casaos(model, store) {
       id: `com.${store.id}.${model.id}`,
       architectures: model.architectures,
       main: model.main,
-      author: store.maintainer,
+      author: model.maintainer ?? store.maintainer,
       developer: model.developer,
       category: casaCategory(model.category),
       icon: `${base}/icon.png`,

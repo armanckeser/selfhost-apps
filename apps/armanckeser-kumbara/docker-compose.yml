@@ -1,12 +1,11 @@
 services:
   app:
-    image: ghcr.io/armanckeser/github-stars-organizer:1.2.1
-    container_name: selfhost-github-stars-organizer-app
+    image: ghcr.io/armanckeser/kumbara:0.22.0
+    container_name: kumbara-app
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://postgres:${GITHUB_STARS_ORGANIZER_DB}@selfhost-github-stars-organizer-postgres:5432/app
-      ELECTRIC_URL: http://selfhost-github-stars-organizer-electric:3000
-      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      DATABASE_URL: postgresql://postgres:${KUMBARA_DB}@kumbara-postgres:5432/app
+      ELECTRIC_URL: http://kumbara-electric:3000
       AUTH_PASSWORD: ${AUTH_PASSWORD}
     depends_on:
       postgres:
@@ -18,12 +17,12 @@ services:
       internal_port: 8080
   postgres:
     image: postgres:16-alpine
-    container_name: selfhost-github-stars-organizer-postgres
+    container_name: kumbara-postgres
     restart: unless-stopped
     environment:
       POSTGRES_DB: app
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${GITHUB_STARS_ORGANIZER_DB}
+      POSTGRES_PASSWORD: ${KUMBARA_DB}
     command:
       - postgres
       - -c
@@ -43,10 +42,10 @@ services:
       - ${APP_DATA_DIR}/data/pgdata:/var/lib/postgresql/data
   electric:
     image: electricsql/electric:1.7.6
-    container_name: selfhost-github-stars-organizer-electric
+    container_name: kumbara-electric
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://postgres:${GITHUB_STARS_ORGANIZER_DB}@selfhost-github-stars-organizer-postgres:5432/app?sslmode=disable
+      DATABASE_URL: postgresql://postgres:${KUMBARA_DB}@kumbara-postgres:5432/app?sslmode=disable
       ELECTRIC_INSECURE: "true"
       ELECTRIC_STORAGE_DIR: /var/lib/electric/persistent
     depends_on:

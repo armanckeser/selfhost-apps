@@ -1,7 +1,7 @@
 services:
   app:
     image: ghcr.io/armanckeser/jellymeme:1.1.0
-    container_name: selfhost-jellymeme-app
+    container_name: jellymeme-app
     restart: unless-stopped
     environment:
       AUTH_PASSWORD: ${AUTH_PASSWORD}
