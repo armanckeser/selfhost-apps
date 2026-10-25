@@ -11,6 +11,16 @@ import { AUTH_FIELD, substitute } from "../model.mjs";
 
 const folder = (model) => model.name.replace(/[^A-Za-z0-9]/g, "");
 
+// The Install button takes the compose defaults; only Custom Installation shows the environment
+// variables, so a value the app needs is spelled out before install.
+function installTip(requiredFields, builtinAuth) {
+  const lines = [
+    ...requiredFields.map((field) => `Use Custom Installation and set ${field.name}: ${field.label}.${field.help ? ` ${field.help}` : ""}`),
+    ...(builtinAuth ? ["Set AUTH_PASSWORD if anyone else on your network can reach this server; leave it empty for no login."] : []),
+  ];
+  return lines.length ? { before_install: { en_US: lines.join("\n\n") } } : {};
+}
+
 export function casaos(model, store) {
   const appId = `${store.id}-${model.id}`;
   const fixedSecret = (name) => createHash("sha256").update(`${appId}:${name}`).digest("hex").slice(0, 32);
@@ -77,9 +87,7 @@ export function casaos(model, store) {
       title: { en_US: model.name },
       tagline: { en_US: model.tagline },
       description: { en_US: model.description },
-      tips: model.auth === "builtin"
-        ? { before_install: { en_US: "Set AUTH_PASSWORD if anyone else on your network can reach this server; leave it empty for no login." } }
-        : {},
+      tips: installTip(model.env.filter((field) => field.required), model.auth === "builtin"),
       index: "/",
       port_map: String(model.hostPort),
       scheme: "http",
