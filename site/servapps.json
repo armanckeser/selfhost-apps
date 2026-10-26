@@ -34,7 +34,7 @@
         "self-hosted"
       ],
       "repository": "https://github.com/armanckeser/kumbara",
-      "image": "ghcr.io/armanckeser/kumbara:0.22.0",
+      "image": "ghcr.io/armanckeser/kumbara:0.27.0",
       "supported_architectures": [
         "amd64",
         "arm64"

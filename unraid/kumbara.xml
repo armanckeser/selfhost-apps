@@ -19,7 +19,7 @@ Kumbara is a phone app you install from the browser. Every screen loads from dat
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/kumbara.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/kumbara.png</Icon>
-  <Changes>0.22.0: - Kumbara now installs from the app stores of Cosmos, Umbrel, CasaOS/ZimaOS, Runtipi, Unraid and Portainer, through https://github.com/armanckeser/selfhost-apps. Or with one command and no checkout: `docker compose -f oci://ghcr.io/armanckeser/kumbara-stack:latest up -d`.</Changes>
+  <Changes>0.27.0: Design pass across the app: merchant logos on every list, one row shape (face, name, one quiet line, amount), a new transaction sheet header, plain group labels, subscriptions as rows with actions in their sheet, and no checkboxes on phones until a long-press.</Changes>
   <License>AGPL-3.0-or-later</License>
   <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/kumbara-1.png</Screenshot>
   <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/kumbara-2.png</Screenshot>

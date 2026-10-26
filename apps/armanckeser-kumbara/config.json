@@ -9,8 +9,8 @@
     "finance"
   ],
   "description": "Budgeting that files your bank feed for you and opens instantly on your phone.",
-  "tipi_version": 22000,
-  "version": "0.22.0",
+  "tipi_version": 27000,
+  "version": "0.27.0",
   "source": "https://github.com/armanckeser/kumbara",
   "website": "https://github.com/armanckeser/kumbara",
   "exposable": true,
@@ -36,6 +36,6 @@
       "hint": "Set one if anyone else on your network can reach this server."
     }
   ],
-  "created_at": 1792876006000,
-  "updated_at": 1792876006000
+  "created_at": 1792969846000,
+  "updated_at": 1792969846000
 }
