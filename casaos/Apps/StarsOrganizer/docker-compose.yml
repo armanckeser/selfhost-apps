@@ -1,7 +1,7 @@
 name: github-stars-organizer
 services:
   app:
-    image: ghcr.io/armanckeser/github-stars-organizer:1.2.1
+    image: ghcr.io/armanckeser/github-stars-organizer:1.3.1
     container_name: github-stars-organizer-app
     restart: unless-stopped
     environment:
@@ -106,12 +106,10 @@ x-casaos:
   index: /
   port_map: "5184"
   scheme: http
-  version: 1.2.1
-  update_at: 2026-10-24
+  version: 1.3.1
+  update_at: 2026-10-27
   release_notes:
-    en_US: |-
-      - With no GitHub token set, **Import Stars** now shows a **Create one** link that opens GitHub with the `repo` scope ticked.
-      - The app-store icon has transparent corners.
+    en_US: "- The robot icon beside **Import Stars** now lists the steps for sorting your stars with an AI agent and shows the prompt to paste, with a copy button."
   website: https://github.com/armanckeser/github-stars-organizer
   repo: https://github.com/armanckeser/github-stars-organizer
   support: https://github.com/armanckeser/github-stars-organizer/issues
