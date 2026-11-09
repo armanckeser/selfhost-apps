@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/armanckeser/github-stars-organizer:1.3.2
+    image: ghcr.io/armanckeser/github-stars-organizer:1.3.3
     container_name: github-stars-organizer-app
     restart: unless-stopped
     environment:

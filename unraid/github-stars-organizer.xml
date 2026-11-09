@@ -19,7 +19,7 @@ Needs a classic GitHub token with the repo scope, which you paste into the insta
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/github-stars-organizer.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/github-stars-organizer.png</Icon>
-  <Changes>1.3.2: - An agent skill: `npx skills add armanckeser/github-stars-organizer` teaches Claude Code, Codex, Cursor and other agents to sort your stars into Lists and clean up abandoned ones, asking before any change.</Changes>
+  <Changes>1.3.3: - Explore has a new chart of the kinds of repos you starred, quarter by quarter, by when you starred them or when they were created. The ones that went quiet (archived or no commit in 6 months) are gray. Group by List, topic, language or tag.</Changes>
   <License>AGPL-3.0-or-later</License>
   <Requires>GitHub token (classic, repo scope). Create one at https://github.com/settings/tokens/new?scopes=repo</Requires>
   <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/github-stars-organizer-1.png</Screenshot>

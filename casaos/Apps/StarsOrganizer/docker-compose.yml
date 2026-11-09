@@ -1,7 +1,7 @@
 name: github-stars-organizer
 services:
   app:
-    image: ghcr.io/armanckeser/github-stars-organizer:1.3.2
+    image: ghcr.io/armanckeser/github-stars-organizer:1.3.3
     container_name: github-stars-organizer-app
     restart: unless-stopped
     environment:
@@ -106,10 +106,12 @@ x-casaos:
   index: /
   port_map: "5184"
   scheme: http
-  version: 1.3.2
-  update_at: 2026-11-03
+  version: 1.3.3
+  update_at: 2026-11-08
   release_notes:
-    en_US: "- An agent skill: `npx skills add armanckeser/github-stars-organizer` teaches Claude Code, Codex, Cursor and other agents to sort your stars into Lists and clean up abandoned ones, asking before any change."
+    en_US: |-
+      - Explore has a new chart of the kinds of repos you starred, quarter by quarter, by when you starred them or when they were created. The ones that went quiet (archived or no commit in 6 months) are gray. Group by List, topic, language or tag.
+      - A "Star on GitHub" link at the bottom of the sidebar stars this repo with your token, and hides once you have.
   website: https://github.com/armanckeser/github-stars-organizer
   repo: https://github.com/armanckeser/github-stars-organizer
   support: https://github.com/armanckeser/github-stars-organizer/issues
