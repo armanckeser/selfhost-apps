@@ -19,7 +19,7 @@ Needs a classic GitHub token with the repo scope, which you paste into the insta
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/github-stars-organizer.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/github-stars-organizer.png</Icon>
-  <Changes>1.3.3: - Explore has a new chart of the kinds of repos you starred, quarter by quarter, by when you starred them or when they were created. The ones that went quiet (archived or no commit in 6 months) are gray. Group by List, topic, language or tag.</Changes>
+  <Changes>1.4.2: Star search now shows each repo's last release, so a repo that still gets commits but hasn't shipped in over a year stands out. The suggested CLAUDE.md / AGENTS.md line now asks your agent to say when your pick is stale and name the current alternative: &quot;Before you suggest a library, tool or GitHub repo, run `npx github-stars-organizer search &lt;a few words&gt;` to check what I already starred. If my pick is quiet or hasn't released in a year, say so and name the current alternative.&quot;</Changes>
   <License>AGPL-3.0-or-later</License>
   <Requires>GitHub token (classic, repo scope). Create one at https://github.com/settings/tokens/new?scopes=repo</Requires>
   <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/github-stars-organizer-1.png</Screenshot>
