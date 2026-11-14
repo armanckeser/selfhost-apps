@@ -9,8 +9,8 @@
     "development"
   ],
   "description": "Search, tag, rate and sort your GitHub stars into GitHub Lists.",
-  "tipi_version": 1004002,
-  "version": "1.4.2",
+  "tipi_version": 1005000,
+  "version": "1.5.0",
   "source": "https://github.com/armanckeser/github-stars-organizer",
   "website": "https://github.com/armanckeser/github-stars-organizer",
   "exposable": true,
@@ -43,6 +43,6 @@
       "hint": "Set one if anyone else on your network can reach this server."
     }
   ],
-  "created_at": 1794284175000,
-  "updated_at": 1794284175000
+  "created_at": 1794640630000,
+  "updated_at": 1794640630000
 }

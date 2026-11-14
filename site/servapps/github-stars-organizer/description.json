@@ -7,7 +7,7 @@
     "self-hosted"
   ],
   "repository": "https://github.com/armanckeser/github-stars-organizer",
-  "image": "ghcr.io/armanckeser/github-stars-organizer:1.4.2",
+  "image": "ghcr.io/armanckeser/github-stars-organizer:1.5.0",
   "supported_architectures": [
     "amd64",
     "arm64"

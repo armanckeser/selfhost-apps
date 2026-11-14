@@ -1,7 +1,7 @@
 name: github-stars-organizer
 services:
   app:
-    image: ghcr.io/armanckeser/github-stars-organizer:1.4.2
+    image: ghcr.io/armanckeser/github-stars-organizer:1.5.0
     container_name: github-stars-organizer-app
     restart: unless-stopped
     environment:
@@ -106,10 +106,10 @@ x-casaos:
   index: /
   port_map: "5184"
   scheme: http
-  version: 1.4.2
-  update_at: 2026-11-10
+  version: 1.5.0
+  update_at: 2026-11-14
   release_notes:
-    en_US: "Star search now shows each repo's last release, so a repo that still gets commits but hasn't shipped in over a year stands out. The suggested CLAUDE.md / AGENTS.md line now asks your agent to say when your pick is stale and name the current alternative: \"Before you suggest a library, tool or GitHub repo, run `npx github-stars-organizer search <a few words>` to check what I already starred. If my pick is quiet or hasn't released in a year, say so and name the current alternative.\""
+    en_US: The npx app reads a run's cards with your own GitHub login, so it keeps working when stard.armanckeser.com is busy (#110).
   website: https://github.com/armanckeser/github-stars-organizer
   repo: https://github.com/armanckeser/github-stars-organizer
   support: https://github.com/armanckeser/github-stars-organizer/issues
