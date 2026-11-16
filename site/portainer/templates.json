@@ -14,14 +14,14 @@
       "platform": "linux",
       "logo": "https://armanckeser.github.io/selfhost-apps/portainer/github-stars-organizer.png",
       "repository": {
-        "url": "https://github.com/armanckeser/github-stars-organizer",
+        "url": "https://github.com/armanckeser/stard",
         "stackfile": "docker-compose.selfhost.yml"
       },
       "env": [
         {
           "name": "TAG",
           "label": "Version",
-          "default": "1.5.0"
+          "default": "1.7.0"
         },
         {
           "name": "PORT",

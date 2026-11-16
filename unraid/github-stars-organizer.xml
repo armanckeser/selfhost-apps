@@ -6,8 +6,8 @@
   <Network>bridge</Network>
   <Shell>bash</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/armanckeser/github-stars-organizer/issues</Support>
-  <Project>https://github.com/armanckeser/github-stars-organizer</Project>
+  <Support>https://github.com/armanckeser/stard/issues</Support>
+  <Project>https://github.com/armanckeser/stard</Project>
   <Overview>Search, tag, rate and sort your GitHub stars into GitHub Lists.
 
 Stars Organizer imports every repo you have starred on GitHub into one searchable table, with language, stars, last push and a health score. Tag repos, rate them, write notes, and sort them into GitHub Lists. Lists you make here are real GitHub Lists, so they show on your profile.
@@ -19,7 +19,7 @@ Needs a classic GitHub token with the repo scope, which you paste into the insta
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/github-stars-organizer.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/github-stars-organizer.png</Icon>
-  <Changes>1.5.0: The npx app reads a run's cards with your own GitHub login, so it keeps working when stard.armanckeser.com is busy (#110).</Changes>
+  <Changes>1.7.0: - Opponents build like players: the same gold, shops and rerolls, a boost after rounds 2 and 4, and a class. Each round is a little harder, from about 84% won in round 1 to about 58% by round 5 (#144).</Changes>
   <License>AGPL-3.0-or-later</License>
   <Requires>GitHub token (classic, repo scope). Create one at https://github.com/settings/tokens/new?scopes=repo</Requires>
   <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/github-stars-organizer-1.png</Screenshot>
