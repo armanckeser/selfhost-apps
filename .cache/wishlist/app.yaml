@@ -1,0 +1,52 @@
+# Store listing for Wishlist. armanckeser/selfhost-apps reads this file from the latest release and
+# generates every store package from it (Cosmos, Umbrel, CasaOS/ZimaOS, Runtipi, Unraid, Portainer).
+# Paths are relative to the repo root.
+
+id: wishlist
+name: Wishlist
+# Wishlist has its own accounts (the first person to sign up), so stores don't add a password.
+auth: none
+tagline: A wishlist that makes you wait before you buy.
+description: |
+  Wishlist gives you an allowance that grows by the second. Paste a product link and the name, photo and price fill in; prices are checked daily and you are told when they drop.
+
+  Each item has to cool off before it is ready to buy, by a rule you set such as 3 days for every $100. Buying before then freezes your balance for 7 days. Friends can gift an item from a list you share.
+
+  Open the app after installing and sign up: the first account is yours.
+category: shopping
+developer: Armanc Keser
+website: https://github.com/armanckeser/wishlist
+repo: https://github.com/armanckeser/wishlist
+support: https://github.com/armanckeser/wishlist/issues
+license: AGPL-3.0-or-later
+icon: frontend/public/icons/icon-512.png
+screenshots:
+  - img/cover.png
+image: ghcr.io/armanckeser/wishlist
+compose: docker-compose.selfhost.yml
+host_port: 5185
+services:
+  app:
+    image: ghcr.io/armanckeser/wishlist:${version}
+    port: 8080
+    environment:
+      POSTGRES_SERVER: ${host:postgres}
+      POSTGRES_DB: wishlist
+      POSTGRES_USER: wishlist
+      POSTGRES_PASSWORD: ${secret:db}
+    depends_on: [postgres]
+  postgres:
+    image: postgres:17
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: wishlist
+      POSTGRES_USER: wishlist
+      POSTGRES_PASSWORD: ${secret:db}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wishlist -d wishlist"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      pgdata: /var/lib/postgresql/data/pgdata
+env: []
