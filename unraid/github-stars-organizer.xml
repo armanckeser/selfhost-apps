@@ -19,7 +19,7 @@ Needs a classic GitHub token with the repo scope, which you paste into the insta
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/github-stars-organizer.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/icons/github-stars-organizer.png</Icon>
-  <Changes>1.7.0: - Opponents build like players: the same gold, shops and rerolls, a boost after rounds 2 and 4, and a class. Each round is a little harder, from about 84% won in round 1 to about 58% by round 5 (#144).</Changes>
+  <Changes>1.8.0: Hi! You probably starred this back when it was only a stars organizer. Since then I've built a game on top of it: your GitHub stars become creatures in a TFT-style auto battler, and your Lists become your decks.</Changes>
   <License>AGPL-3.0-or-later</License>
   <Requires>GitHub token (classic, repo scope). Create one at https://github.com/settings/tokens/new?scopes=repo</Requires>
   <Screenshot>https://raw.githubusercontent.com/armanckeser/selfhost-apps/main/unraid/screenshots/github-stars-organizer-1.png</Screenshot>

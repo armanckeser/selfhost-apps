@@ -9,8 +9,8 @@
     "development"
   ],
   "description": "Search, tag, rate and sort your GitHub stars into GitHub Lists.",
-  "tipi_version": 1007000,
-  "version": "1.7.0",
+  "tipi_version": 1008000,
+  "version": "1.8.0",
   "source": "https://github.com/armanckeser/stard",
   "website": "https://github.com/armanckeser/stard",
   "exposable": true,
@@ -43,6 +43,6 @@
       "hint": "Set one if anyone else on your network can reach this server."
     }
   ],
-  "created_at": 1794802964000,
-  "updated_at": 1794802964000
+  "created_at": 1795219252000,
+  "updated_at": 1795219252000
 }

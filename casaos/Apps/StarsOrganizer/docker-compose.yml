@@ -1,7 +1,7 @@
 name: github-stars-organizer
 services:
   app:
-    image: ghcr.io/armanckeser/github-stars-organizer:1.7.0
+    image: ghcr.io/armanckeser/github-stars-organizer:1.8.0
     container_name: github-stars-organizer-app
     restart: unless-stopped
     environment:
@@ -106,14 +106,25 @@ x-casaos:
   index: /
   port_map: "5184"
   scheme: http
-  version: 1.7.0
-  update_at: 2026-11-16
+  version: 1.8.0
+  update_at: 2026-11-21
   release_notes:
     en_US: |-
-      - Opponents build like players: the same gold, shops and rerolls, a boost after rounds 2 and 4, and a class. Each round is a little harder, from about 84% won in round 1 to about 58% by round 5 (#144).
-      - Classes have their themes back: Maintainer powers up your ace and own repos, Scout cards under 1,000 stars, Veteran repos 8+ years old, Archivist quiet repos (#142).
-      - Class text names your ace instead of showing "{first}", and a deck picked in Customize is read right away, so Play starts without a second wait (#141).
-      - Organizer screens lead with a short label, with the explanation behind ⓘ: the demo note, Left out, and Backups (#139).
+      Hi! You probably starred this back when it was only a stars organizer. Since then I've built a game on top of it: your GitHub stars become creatures in a TFT-style auto battler, and your Lists become your decks.
+
+      Try it with your own stars: https://stard.armanckeser.com/run
+
+      It's still a work in progress, so let me know if you find it fun, or if you'd rather just have the organizer. One click in the poll helps a lot: https://github.com/armanckeser/stard/discussions/169
+
+      ## New since 1.7.0
+      - Fights run about twice as fast on a phone (#165)
+      - Roles fight like they look: tanks draw hits, assassins go for the weakest (#153, #161)
+      - Cleaner fights: fewer words, damage numbers that pop, shields you can see (#156–#167)
+      - Opponents buy board slots, with a gentle first level (#152)
+      - Replay a saved team against the opponents your run faced (#150)
+      - Customize your team opens at once, and team saves retry on a lost connection (#146, #147)
+
+      The organizer is unchanged and stays free.
   website: https://github.com/armanckeser/stard
   repo: https://github.com/armanckeser/stard
   support: https://github.com/armanckeser/stard/issues
